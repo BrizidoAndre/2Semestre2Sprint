@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Criar um formulário para receber o nome do usuário -->
+    <!-- Substituir por um nickname -->
+    <!-- Ao clicar do botão o nickname deve ser exibido na tela -->
+    <h1>Formulário para receber Nome</h1>
+
+    <form onsubmit="GerarApelido()">
+
+        <label for="nome">Nome</label>
+        <input type="text" id="nome">
+        <br>
+
+
+        <label for="apelido">Apelido</label>
+        <input type="text" id="apelido">
+        <br>
+
+        <button type="submit">Gerar apelido</button>
+
+        <p>Apelido:
+            <strong id="resposta">
+                ???
+            </strong>
+        </p>
+
+    </form>
+</body>
+<script src="./scripts/strings.js">
+</script>
+
+</html>

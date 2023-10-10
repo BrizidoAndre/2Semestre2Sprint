@@ -12,10 +12,6 @@ function calcular() {//soma
         alert(`É necessário colocar um número`)
     }
 
-    if (op == '0') {
-        resultado = "É necessário inserir uma operação";
-    }
-
     else if (op == '+') {
         resultado = somar(n1, n2);
 
@@ -26,11 +22,14 @@ function calcular() {//soma
     } //continuar a validação para as 5 opções
     else if (op == '*') {
         resultado = multiplicar(n1, n2);
-
+ 
     }
     else if (op == '/') {
         resultado = dividir(n1, n2);
 
+    }
+    else{
+        resultado = "É necessario inserir uma operação"
     }
     // criar as 4 funções, uma para cada operação
 
