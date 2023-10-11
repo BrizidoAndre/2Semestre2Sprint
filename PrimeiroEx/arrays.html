@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         let frutas = ['banana', 'maçã', 'morango'];
 
-        console.log(`Quantidade de frutas: ${frutas.length}`);
+        console.log(`Quantidade de frutas antes da adição: ${frutas.length}`);
 
         frutas.push('uva')
         frutas.push('mamão')
@@ -18,9 +20,74 @@
 
         console.log(`Quantidade de frutas atualizado: ${frutas.length}`);
 
-        console.log(frutas);
+        frutas.sort();
+
+        console.log(frutas[2]);
+        console.log(frutas[0]);
+        console.log(frutas[5]);
+
+        console.log(frutas[6]);
+
+        // for (let index = 0; index < frutas.length; index++) {
+        //     console.log(`Frutas${index + 1} ${frutas[index]} `);
+        // }
+
+        // // Note que estamos usando uma função como parâmetro
+        // // Isso se chama callback function 
+        // //para cada item do array a função se repete 
+        // frutas.forEach(function (fruta, i) {
+        //     console.log(`Fruta ${i+1} ${fruta}`);
+        // });
+
+        let prateleira = [
+            "Cerveja",
+            "Coca-Cola",
+            "Água",
+            "Corote",
+            "Dolly",
+            "H2O",
+            "Guaraná Antartica",
+            "Itubaína"
+        ];
+
+        let garcon = prateleira[prateleira.length - 1]
+
+        let bebida = "Dolly";
+
+        switch (garcon) {
+
+            case prateleira[0]:
+                console.log(`Achei sua bebida ${prateleira[0]}`);
+                break;
+            case prateleira[1]:
+                console.log(`Achei sua bebida ${prateleira[1]}`);
+                break;
+            case prateleira[2]:
+                console.log(`Achei sua bebida ${prateleira[2]}`);
+                break;
+            case prateleira[3]:
+                console.log(`Achei sua bebida ${prateleira[3]}`);
+                break;
+            case prateleira[4]:
+                console.log(`Achei sua bebida ${prateleira[4]}`);
+                break;
+            case prateleira[5]:
+                console.log(`Achei sua bebida ${prateleira[5]}`);
+                break;
+            case prateleira[6]:
+                console.log(`Achei sua bebida ${prateleira[6]}`);
+                break;
+            case prateleira[7]:
+                console.log(`Achei sua bebida ${prateleira[7]}`);
+                break;
+            default:
+                console.log(`Não temos essa bebida`);
+                break;
+        }
+
 
     </script>
-    
+
 </body>
+
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+        // Isso é o que chamamos de um objeto literal
+        let eduardo = {
+            nome : "Eduardo",
+            sobrenome : "Mendes da Costa",
+            idade : 41
+        };
+        // As variáveis em js são extremamente fracas
+        // Aqui por exemplo eu nem criei o cpf junto com o objeto mas ele aceita o valor
+        eduardo.cpf = "1234560789";
+
+
+        // Criando um objeto de maneira tradicional (caiu em desuso)
+        let carlos = new Object({
+            nome : "Carlos",
+            Sobrenome : "Roque"
+        });
+        carlos.oculos = true;
+
+        console.log(eduardo.cpf);
+        console.log(carlos.oculos);
+
+        let pessoas = [eduardo, carlos]
+
+        pessoas.forEach(function (p) {
+            console.log(`Nome: ${p.nome}`);
+        });
+    </script>
+</body>
+</html>
