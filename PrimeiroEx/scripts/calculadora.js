@@ -6,7 +6,7 @@ function calcular() {//soma
     let n2 = parseFloat(document.getElementById('n2').value);//campo 2
     let op = document.getElementById('operacao').value;//valor selecionado no select
     let resultado;//undefined
-    let res;
+
 
     if (isNaN(n1) || isNaN(n2)) {
         alert(`É necessário colocar um número`)
