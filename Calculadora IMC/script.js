@@ -26,14 +26,16 @@ function calcular(e){
     // gera o texto da situação
     const situacao = retornaSituação(imc);
     
-    let hoje = new Date().toLocaleString;
-    let dia = hoje.getDay() + 15;
-    let mes = hoje.getMonth() + 1;
-    let ano = hoje.getFullYear();
+    let hoje = new Date().toLocaleString();
+
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const dataCadastro = day + "/" + month + "/" + year;
 
     //Gerando o objeto Pessoa com seus respectivos dados
-    const pessoa = {nome, altura, peso, imc, situacao, dataCadastro: dia + "/" + mes + "/" + ano};//objeto vazio
-
+    const pessoa = {nome, altura, peso, imc, situacao, dataCadastro};//objeto vazio
 
     // Adiciona a pessoa na lista
     arrPessoas.push(pessoa);
