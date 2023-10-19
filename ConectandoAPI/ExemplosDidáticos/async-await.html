@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Await e Async</title>
+    <script>
+
+        let urlJsonPlaceholder = "https://jsonplaceholder.typicode.com"
+
+        // get
+        async function BuscarPosts(){
+            const resource = urlJsonPlaceholder + "/posts"; //todos os post
+
+            try {
+                const api = await fetch(resource);
+                const posts = await api.json();
+                console.log(posts);
+
+            } catch (e) {
+                console.log("Deu pau na API" + e);
+            }
+        }
+
+        async function BuscarUmPost(){
+            const post = document.getElementById("idPost").value;
+            const resource = urlJsonPlaceholder + "/posts/" + post
+            try {
+                const api = await fetch(resource);
+                const resultado = await api.json();
+                console.log(resultado);
+            } catch (e) {
+                console.log("Corriga os erros" + e);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Async e Await JS</h1>
+    <label for="">Id Post</label>
+    <input type="number" id="idPost" placeholder="digite o id do post" min="1">
+    <button onclick="BuscarUmPost()">Exibir Post</button>
+
+    <br><br>
+    <button onclick="BuscarPosts()">Chamar API</button>
+</body>
+</html>

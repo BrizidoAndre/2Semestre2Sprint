@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Await e Async</title>
+    <script>
+        async function BuscaCep() {
+            let cep = document.getElementById("cep").value;
+            let url = `https://viacep.com.br/ws/${cep}/json/`
+            try {
+                const request = await fetch(url);
+                const dados = await request.json();
+
+                console.log(dados);
+            } catch (e) {
+                console.log("Deu erros. Arrume-os");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Async e Await JS</h1>
+    <form onclick="BuscaCep()">
+        <label for="cep">Insira o CEP aqui</label>
+        <input type="text" id="cep">
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+</html>

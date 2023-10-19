@@ -1,0 +1,20 @@
+Para usar uma api nós instalamos um modelo de api json server gratuito
+Os seguintes passos
+
+1  npm install -g json-server
+Para instalar o json server na máquina. Esse será o modelo usado para todos os projetos a partir de agora
+
+2 - Criamos um arquivo db.json e então copiamos o seguinte texto no arquivo
+{
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}
+
+3 npx json-server --watch db.json
+
+Para conectar o json server com  o arquivo que criamos

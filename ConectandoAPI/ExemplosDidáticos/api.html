@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+
+        const url = "https://viacep.com.br/ws/03412080/json/";
+        // // O fetch é uma função de chamadas de api
+        // const pedido = fetch(url)
+        //     .then((resp) => {
+        //         console.log(resp);
+        //         return resp.json();
+        //     })
+        //     .then((dados) => {
+        //         console.log(dados);
+        //         console.log();
+
+        //         console.log(`
+        //             Endereço: ${dados.logradouro}
+        //             Cidade:   ${dados.localidade}
+        //             Estado:   ${dados.uf}
+        //         `);
+        //     })
+        //     .catch((e) => {
+        //         console.log("Deu ruim!");
+        //     })
+
+
+
+
+        async function chamarApi(endereco) {
+            try {
+                const promise = await fetch(endereco);
+                const dados = await promise.json();
+                console.log(dados);
+
+            } catch (e) {
+                console.log("Deu ruim na API");
+            }
+
+        }
+
+        chamarApi(url);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
