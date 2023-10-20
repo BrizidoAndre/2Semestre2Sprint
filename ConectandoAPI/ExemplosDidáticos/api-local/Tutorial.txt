@@ -15,6 +15,11 @@ Para instalar o json server na máquina. Esse será o modelo usado para todos os
   "profile": { "name": "typicode" }
 }
 
+O arquivo serve para criar as rotas bem como os itens de uma lista de armazenamento
+Por exemplo, em nossa api temos o endereço posts e nesse endereço temos um array de objetos
+Cada  objeto tem id, titulo e author
+
 3 npx json-server --watch db.json
 
 Para conectar o json server com  o arquivo que criamos
+e ser capaz do rodar a máquina

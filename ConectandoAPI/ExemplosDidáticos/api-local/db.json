@@ -1,9 +1,43 @@
 {
-    "posts": [
-      { "id": 1, "title": "json-server", "author": "typicode" }
-    ],
-    "comments": [
-      { "id": 1, "body": "some comment", "postId": 1 }
-    ],
-    "profile": { "name": "typicode" }
+  "contatos" : [
+
+  ],
+
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "Aprendendo a utilizar o Json Server",
+      "author": "Eduardo",
+      "id": 3
+    },
+    {
+      "title": "Aprendendo a criar API's",
+      "author": "Carlos",
+      "id": 4
+    },
+    {
+      "title": "Ganhando dinheiro",
+      "author": "Thiago Finch",
+      "id": 5
+    },
+    {
+      "title": "deletar",
+      "author": "Vasco da Gama",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
   }
+}
