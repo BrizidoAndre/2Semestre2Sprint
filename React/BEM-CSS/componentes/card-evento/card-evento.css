@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:wght@400;900&display=swap');
+
+.container{
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card{
+    border: 2px solid rgba(130, 27, 71, 1);
+
+    width: 210px;
+    height: 230px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 10px;
+}
+
+.card__texto{
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+.card__texto--titulo{
+    font-weight: 500px;
+}
+
+.card__texto--descricao{
+    font-size: 16px;
+    text-align: center;
+
+    overflow-y: scroll;
+}
+
+
+.card__texto--link{
+    color: rgba(130, 27, 71, 1);
+    text-decoration: none;
+}
+
+.card__texto--disabled{
+    cursor: not-allowed;
+}
