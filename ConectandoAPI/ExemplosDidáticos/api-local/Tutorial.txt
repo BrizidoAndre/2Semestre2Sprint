@@ -17,7 +17,7 @@ Para instalar o json server na máquina. Esse será o modelo usado para todos os
 
 O arquivo serve para criar as rotas bem como os itens de uma lista de armazenamento
 Por exemplo, em nossa api temos o endereço posts e nesse endereço temos um array de objetos
-Cada  objeto tem id, titulo e author
+Cada  objeto tem id, titulo e autor
 
 3 npx json-server --watch db.json
 
