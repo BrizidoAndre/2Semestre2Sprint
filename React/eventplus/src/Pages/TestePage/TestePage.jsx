@@ -4,16 +4,26 @@ import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 
 const TestePage = () => {
+    // Variáveis do componente
     const [n1, setN1] = useState(0);
     const [n2, setN2] = useState(0);
+    const [total, setTotal] = useState(0);
+
+    // Função para calcular as variáveis do componente
+    function handleCalcular(e) {
+        e.preventDefault();
+        setTotal(parseFloat(n1) + parseFloat(n2));
+    };
 
     return (
         <div>
-            <Header/>
             <h1>Pagina de Poc`s</h1>
             <h2>Calculator</h2>
 
-            <form action="">
+            <form 
+                action=''
+                onSubmit={handleCalcular}
+            >
                 <Input 
                     type='number'
                     placeholder="Insira o primeiro digito"
@@ -40,8 +50,13 @@ const TestePage = () => {
                     textButton="Calcular" 
                     type="submit"
                 />
+                <span>
+                    Resultado: 
+                    <strong>
+                    {total}
+                    </strong>
+                </span>
             </form>
-
         </div>
     );
 };

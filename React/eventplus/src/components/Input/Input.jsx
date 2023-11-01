@@ -14,8 +14,9 @@ const Input = ({onChange, type, placeholder, name, id, value}) => {
                 id={id}
                 value={value}
                 onChange={onChange}
+                
             />
-            <span>{value}</span>
+            <br />
         </>
     );
 };
