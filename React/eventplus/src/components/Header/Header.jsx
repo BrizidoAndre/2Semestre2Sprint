@@ -1,17 +1,29 @@
 import React from 'react';
-import './Header.css'
-import {Link} from 'react-router-dom'
-// Esse recurso serve para o site não recarregar toda vez que mudarmos de página
+import './Header.css';
+
+// Importando Componentes necessários
+import Container from '../Container/Container';
+import Nav from "../Nav/Nav";
+import PerfilUsuario from '../PerfilUsuaio/PerfilUsuario';
+
+// Importando imagens
+import menubar from "../../assets/images/menubar.png"
+
 
 const Header = () => {
     return (
-        <header>
-            <nav>
-                <Link to={"/"}>Home</Link>
-                <Link to={"/eventos"}>Eventos</Link>
-                <Link to={"/tipoEventos"}>Tipo Eventos</Link>
-                <Link to={"/testePage"}>Teste</Link>
-            </nav>
+        <header className='headerPage'>
+            <Container>
+                <div className='header-flex'>
+                    <img
+                    src={menubar}
+                    alt="Imagem menu de barras. Serve para exibir ou esconder o menu do smartphone" 
+                    />
+
+                    <Nav/>
+                    <PerfilUsuario/>
+                </div>
+            </Container>
         </header>
     );
 };
