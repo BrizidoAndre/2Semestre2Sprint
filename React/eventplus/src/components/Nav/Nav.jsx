@@ -7,7 +7,8 @@ import logoDesktop from '../../assets/images/logo-pink.svg';
 
 
 import { Link } from 'react-router-dom';
-
+            //Relembre que esses parâmetros estão
+            //sendo criados no Header 
 const Nav = ({exibeNavbar, setExibeNavbar }) => {
 
     console.log(`Exibe o menu? ${exibeNavbar}`);
@@ -24,11 +25,12 @@ const Nav = ({exibeNavbar, setExibeNavbar }) => {
 
 
 
-            <Link to="/" className='eventlogo'>
+            <Link to="/" className='eventLogo'>
                 <img 
-                className='eventlogo__logo-image' 
-                src={window.innerWidth >= 992 ? logoDesktop : logoMobile} 
-                alt="Event Plus Logo" 
+                    className='eventlogo__logo-image' 
+                    src={window.innerWidth >= 992 ? logoDesktop : logoMobile} 
+                    alt="Event Plus Logo"
+                    onClick={() => {setExibeNavbar(false)}}
                 />
             </Link>
 
@@ -36,9 +38,11 @@ const Nav = ({exibeNavbar, setExibeNavbar }) => {
 
 
             <div className="navbar__items-box">
-                <Link className='navbar__item' to={"/"}>Home</Link>
-                <Link className='navbar__item' to={"/tipoEventos"}>Tipos de Evento</Link>
-                <Link className='navbar__item' to={"/eventos"}>Eventos</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/"}>Home</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/loginPage"}>Login</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/tipoEventos"}>Tipos de Evento</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/eventos"}>Eventos</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/testePage"}>Teste</Link>
             </div>
         </nav>
     );

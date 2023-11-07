@@ -1,12 +1,19 @@
 import React from 'react';
 import './HomePage.css';
-import Header from '../../components/Header/Header'
+import Title from '../../components/Title/Title';
+import Banner from '../../components/Banner/Banner';
+import MainContent from '../../components/MainContent/MainContent';
+import VisionSection from '../../components/VisionSection/VisionSection';
 
 
 const HomePage = () => {
     return (
         <div>
-            <h1>Home Page</h1>
+            <MainContent>
+            <Banner/>
+            <VisionSection/>
+                
+            </MainContent>
         </div>
     );
 };

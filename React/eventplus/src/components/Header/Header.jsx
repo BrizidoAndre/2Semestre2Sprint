@@ -12,7 +12,7 @@ import menubar from "../../assets/images/menubar.png"
 
 const Header = () => {
 
-    const [exibeNavbar, setExibeNavBar] = useState(false); //Exibe ou esconde o menu
+    const [exibeNavbar, setExibeNavbar] = useState(false); //Exibe ou esconde o menu
 
     return (
         <header className='headerpage'>
@@ -21,12 +21,15 @@ const Header = () => {
                     <img
                     src={menubar}
                     alt="Imagem menu de barras. Serve para exibir ou esconder o menu do smartphone" 
-                    onClick={() => {setExibeNavBar(true)}}
-                    className='headerpage_menubar'
+                    onClick={() => {setExibeNavbar(true)}} //Função para exibir ou ocultar o navbar
+                    className='headerpage__menubar'
                     />
 
-
-                    <Nav exibeNavbar={exibeNavbar} setExibeNavBar={setExibeNavBar}/>
+                    {/* Note que aqui nós usamos o desctructuring para criar duas propriedades
+                    exibeNavbar e setExibeNavbar
+                    O valor entre chaves são as variáveis da classe Header*/}
+                    <Nav exibeNavbar={exibeNavbar} setExibeNavbar={setExibeNavbar}/>
+                    {/* Basicamente estamos falando que as nossas variáveis terão o mesmo valor na classe Nav */}
                     <PerfilUsuario/>
                 </div>
             </Container>
