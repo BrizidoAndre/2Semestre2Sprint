@@ -9,7 +9,7 @@ const Home = () => {
     // Essa função é quando clickamos no botão da tela
     const HandleClick = () => {
         // Ao apertar chamamos a função que altera a variável e alteramos
-        setvalue('Melão');
+        setvalue();
     };
 
     // Relembrando sempre que o retorno deve ser uma única div
@@ -21,7 +21,7 @@ const Home = () => {
             <h1>Fruta favorita: {value}</h1>
 
                 {/* Aqui a variável muda só de alterarmos o input dela */}
-                <input type="text"/>
+                <input type="text" id="valor"/>
 
                 {/* On click é a função executada ao apertar o botão */}
                 <button onClick={HandleClick}>Me aperte</button>
