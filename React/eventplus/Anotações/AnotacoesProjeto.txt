@@ -1,0 +1,7 @@
+
+Exemplo de API usado no exercício
+
+1 - npm i axios
+
+O Axios é uma biblioteca para requisições de http. Para o consumo de API's.
+O comando instala essa biblioteca no projeto
