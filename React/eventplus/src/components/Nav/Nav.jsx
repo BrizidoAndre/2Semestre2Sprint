@@ -43,6 +43,7 @@ const Nav = ({exibeNavbar, setExibeNavbar }) => {
                 <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/tipoEventos"}>Tipos de Evento</Link>
                 <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/eventos"}>Eventos</Link>
                 <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/testePage"}>Teste</Link>
+                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/useEffectPage"}>UseEffect</Link>
             </div>
         </nav>
     );
