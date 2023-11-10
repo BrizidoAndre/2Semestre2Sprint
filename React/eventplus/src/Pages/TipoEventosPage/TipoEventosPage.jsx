@@ -1,13 +1,30 @@
 import React from 'react';
 import './TipoEventosPage.css';
-import Header from '../../components/Header/Header'
+import Title from '../../components/Title/Title';
+import MainContent from '../../components/MainContent/MainContent';
+import Container from '../../components/Container/Container';
 
-const TipoEventos = () => {
+const TipoEventosPage = () => {
     return (
-        <div>
-            <h1>Tipo Eventos Page</h1>
-        </div>
+        <>
+            <MainContent>
+                <section className="cadastro-evento-section">
+                    <Container>
+                        <div className="cadastro-evento-box">
+                            
+                            <Title titleText={"Cadastro Tipo de Eventos"}/>
+
+                            {/* <ImageIlustrator /> */}
+
+                            <form className='tipo-evento'>
+                                <p>Formulário será criado aqui</p>
+                            </form>
+                        </div>
+                    </Container>
+                </section>
+            </MainContent>
+        </>
     );
 };
 
-export default TipoEventos;
+export default TipoEventosPage;

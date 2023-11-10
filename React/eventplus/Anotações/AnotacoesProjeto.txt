@@ -3,9 +3,14 @@ Exemplo de API usado no exercício
 
 1 - npm i axios
 
-O Axios é uma biblioteca para requisições de http. Para o consumo de API's.
-O comando instala essa biblioteca no projeto
+O Axios é uma biblioteca para requisições de http. Para o consumo de API's. Estamos usando
+O comando instala essa biblioteca no projeto.
 
+Outro plugin que estamos baixando 
+
+2 - npm install react-tooltip
+
+O TollTip
 
 
 ______________________________________________
@@ -16,3 +21,43 @@ ______________________________________________
 
 FAZER FUNCIONAR A PRÓPRIA API
 
+Para uma api permitir o uso de uma API colocamos o seguinte código
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MyPolicy",
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+    }
+    );
+});
+
+Esse código autoriza nosso front end para fazer uma requisição para nossa API e poder requisitar dados no banco de dados.
+
+Perceba que no bloco nós colocamos o http de nosso front end e depois permitimos qualquer header e qualquer método utilizar o recurso.
+
+Também podemos colocar da seguinte forma:
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MyPolicy",
+    policy =>
+    {
+        policy.AllowAnyOrigin();
+    }
+    );
+});
+
+Aqui qualquer origem terá acesso a nossa API
+
+MUITO IMPORTANTE
+Não esqueça de adicionar a seguinte linha, independente da configuração da permissão
+
+// OUTRA LINHA DE CODIGO PARA LIBERAR O FRONT END
+app.UseCors("MyPolicy");
+
+Para funções separadas que queremos usar nos componentes criamos uma pasta chamada Utils
+Dentro dela é onde será feia as funções para propósitos gerais.
+
+Para chamar a API nós criamos a pasta Services para automatizar a chamada das apis
