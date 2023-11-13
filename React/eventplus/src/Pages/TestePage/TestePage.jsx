@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button/Button';
-import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 
 const TestePage = () => {

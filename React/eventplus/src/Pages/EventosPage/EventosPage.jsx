@@ -1,6 +1,5 @@
 import React from 'react';
 import './EventosPage.css'
-import Header from '../../components/Header/Header'
 
 const EventosPage = () => {
     return (
