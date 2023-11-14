@@ -11,7 +11,7 @@ export const eventsTypeResource = '/TipoEvento'
 
 const apiPort = '7284';
 const localApiUri = `https://localhost:${apiPort}/api`;
-const externalApiUri  = null;
+// const externalApiUri  = null;
 
 const api = axios.create({
     baseURL: localApiUri

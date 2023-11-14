@@ -6,10 +6,11 @@ export const Input = ({
     id,
     value,
     required,
-    additionalClass,
     name,
     placeholder,
-    manipulatorFunction = null }) => {
+    manipulatorFunction, 
+    additionalClass = ""
+}) => {
     return (
         <input
             type={type}
@@ -30,16 +31,21 @@ export const Label = (htmlFor, labelText) => {
 }
 
 //* Componente criado na forma tradicional props ao invés da desestruturação
-export const Button = ({ props }) => {
+export const Button = ({ id,
+    name,
+    type,
+    additionalClass,
+    manipulatorFunction,
+    textButton }) => {
     return (
         <button
-            id={props.id}
-            name={props.name}
-            type={props.type}
-            className={props.additionalClass}
-            onClick={props.manipulatorFunction}
+            id={id}
+            name={name}
+            type={type}
+            className={`button-component ${additionalClass}`}
+            onClick={manipulatorFunction}
         >
-            {props.textButton}
+            {textButton}
         </button>
     )
 }
