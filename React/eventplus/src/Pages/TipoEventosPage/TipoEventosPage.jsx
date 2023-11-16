@@ -25,8 +25,6 @@ const TipoEventosPage = () => {
 
                 setTipoEvento(retorno.data)
 
-                console.log(retorno.data);
-
             } catch (error) {
                 console.log("Erro na api");
                 console.log(error);
@@ -35,8 +33,10 @@ const TipoEventosPage = () => {
 
         // Chama a função/api no carregamento da página/componente
         loadEventType();
-    }, [])
+    }, [tipoEvento]);
 
+    //todo ************Cadastro******************
+    // Cadastra o evento digitado no banco de dados
     async function handleSubmit(e) {
         e.preventDefault();//evita o submit do formulário
 
@@ -59,19 +59,33 @@ const TipoEventosPage = () => {
         alert("Editar");
     }
 
+    //todo *************************Edição ******************************
     // Cancela a tela/ação de edição (volta para o form de cadastro)
     function ediActionAbort(e) {
         alert("Cancelar a tela de edição de dados")
     }
 
-    // Mostra o formulário de edição
+    //todo Mostra o formulário de edição
     function showUpdateForm() {
         alert("Vamos mostrar o formulátio de edição")
     }
 
+    //todo ************************ APAGAR
     // Apaga o tipo de evento na api
-    function handleDelete(idElement) {
-        alert(`Vamos apagar o evento de id: ${idElement}`)
+    async function handleDelete(idElement) {
+        try {
+
+        
+            if (window.confirm(`Confirma a exclusão do evento ${titulo}?`)) {
+
+                await api.delete(eventsTypeResource + `/${idElement}`,)
+            }
+
+
+        } catch (error) {
+            alert("Deu ruim no deletar")
+            console.log(error);
+        }
     }
 
     return (

@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
             //sendo criados no Header 
 const Nav = ({exibeNavbar, setExibeNavbar }) => {
 
-    console.log(`Exibe o menu? ${exibeNavbar}`);
 
     return (
         <nav className={`navbar ${exibeNavbar ? "exibeNavbar" : ""}`}>
