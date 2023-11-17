@@ -41,7 +41,7 @@ const TableTp = ({ dados, fnDelete = null, fnUpdate = null }) => {
                                 //? Propriedades em um html devem conter o nome todo minúsculo. Se for em qualquer estilo 
                                 //? Pascal ou Camel Case mostra um erro indicando o nome todo minúsculo
                                 > 
-
+                                
                                 <img
                                     className="table-data__icon"
                                     src={edtiPen}
@@ -49,7 +49,7 @@ const TableTp = ({ dados, fnDelete = null, fnUpdate = null }) => {
                                     onClick={() => {
                                         fnUpdate(tp.idTipoEvento)
                                     }}/>
-
+                                    
                             </td>
 
                             <td
