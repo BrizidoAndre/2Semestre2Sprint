@@ -63,7 +63,14 @@ export const Select = ({
     additionalClass,
     manipulatorFunction = null,
     defaultValue,
-    options}) => {
+    options,
+    isEmpty = true}) => {
+
+    if (isEmpty) {
+        
+    }
+
+
     return (
         <select
             name={name}
@@ -76,7 +83,8 @@ export const Select = ({
 
             <option value={defaultValue} defaultValue hidden>Selecione o tipo de evento</option>
             {/* options.map(???) */}
-            {options.map(o => {
+            {
+            options.map(o => {
                 return (
                     <option value={o.idTipoEvento} key={o.idTipoEvento}>{o.titulo}</option>
                 );

@@ -19,12 +19,11 @@ import { dateFormatDbToViewEfetivo, dateFormatDbToViewEfetivoContrario } from '.
 const EventosPage = () => {
     const [frmEdit, setFrmEdit] = useState(true); //Está cadastrando?
     const [evento, setEvento] = useState({
-        idEvento:'',
         dataEvento: "",
         nomeEvento: "",
         descricao: "",
         idTipoEvento: "",
-        idInstituicao: "860669ec-c897-48c1-90f9-39f4113e3b8f"
+        idInstituicao: "94d8ef54-02e7-4f4f-a796-6fe3e11dde74" //!ATENÇÃO AQUI ESTÁ O ID DA INSTITUIÇÃO
     }) //Objeto de cadastro
     const [listEvento, setListEvento] = useState([]); //Lista de Eventos
     const [tipoEvento, setTipoEvento] = useState([]); //Array de objetos para a utilização do options no cadastro
@@ -75,12 +74,11 @@ const EventosPage = () => {
         console.log(dadoGenerico);
     }
 
-    function clearEvento(){
+    function clearEvento() {
         setEvento({
             dataEvento: "",
             descricao: "",
             nomeEvento: "",
-            idInstituicao: "",
             idTipoEvento: ""
         })
     }
@@ -91,7 +89,15 @@ const EventosPage = () => {
         try {
 
             console.log(evento);
-            const retorno = await api.post(eventsResource, evento)
+            const retorno = await api.post(eventsResource, {
+
+                "dataEvento": evento.dataEvento,
+                "nomeEvento": evento.nomeEvento,
+                "descricao": evento.descricao,
+                "idTipoEvento": evento.idTipoEvento,
+                "idInstituicao": "94d8ef54-02e7-4f4f-a796-6fe3e11dde74"
+
+            })
 
         } catch (error) {
             alert("Erro na API")
@@ -124,8 +130,17 @@ const EventosPage = () => {
 
             console.log(evento);
 
-            const retorno = await (api.put(`${eventsResource}/${evento.idEvento}`,evento))
+            const retorno = await (api.put(`${eventsResource}/${evento.idEvento}`, {
 
+                "dataEvento": evento.dataEvento,
+                "nomeEvento": evento.nomeEvento,
+                "descricao": evento.descricao,
+                "idTipoEvento": evento.idTipoEvento,
+                "idInstituicao": "94d8ef54-02e7-4f4f-a796-6fe3e11dde74"
+
+            }))
+
+            clearEvento();
 
         } catch (error) {
             alert("Erro no update")

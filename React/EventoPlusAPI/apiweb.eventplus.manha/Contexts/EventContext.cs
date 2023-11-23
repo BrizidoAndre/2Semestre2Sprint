@@ -15,7 +15,7 @@ namespace apiweb.eventplus.manha.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=NOTE07-S15; Database= Event+_manha;User Id =sa ; Pwd = Senai@134; TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=LAPTOP-OMCU8E9S\\DBPrimeiroTeste; Database= EventPlus;Trusted_Connection=True; TrustServerCertificate=true;");
             base.OnConfiguring(optionsBuilder);
         }
 
