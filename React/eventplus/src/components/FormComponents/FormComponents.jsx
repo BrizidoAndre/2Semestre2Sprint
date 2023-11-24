@@ -81,7 +81,7 @@ export const Select = ({
             value={defaultValue}
         >
 
-            <option value={defaultValue} defaultValue hidden>Selecione o tipo de evento</option>
+            <option defaultValue value={""} hidden>Selecione o tipo de evento</option>
             {/* options.map(???) */}
             {
             options.map(o => {

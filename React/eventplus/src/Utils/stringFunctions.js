@@ -16,3 +16,4 @@ export const dateFormatDbToViewEfetivoContrario = data => {
 
     return data;
 }
+

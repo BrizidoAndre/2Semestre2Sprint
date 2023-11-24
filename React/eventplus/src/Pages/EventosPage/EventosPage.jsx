@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './EventosPage.css'
 
 // Importando Imagens
-import eventoImage from '../../assets/images/evento.svg'
+import eventoImage from '../../assets/images/evento.svg';
+import Notification from '../../components/Notification/Notification';
 
 // Importando Componentes
 import Container from '../../components/Container/Container';
@@ -12,21 +13,25 @@ import Title from '../../components/Title/Title';
 import { Button, Input, Select } from '../../components/FormComponents/FormComponents';
 import api, { eventsResource, eventsTypeResource } from '../../Services/Service';
 import TableTp from './TableTp/TableTp';
+import Spinner from '../../components/Spinner/Spinner';
 
 import { dateFormatDbToViewEfetivo, dateFormatDbToViewEfetivoContrario } from '../../Utils/stringFunctions';
 
 
 const EventosPage = () => {
     const [frmEdit, setFrmEdit] = useState(true); //Está cadastrando?
+    const [listEvento, setListEvento] = useState([]); //Lista de Eventos
+    const [tipoEvento, setTipoEvento] = useState([]); //Array de objetos para a utilização do options no cadastro
+    const [notifyUser, setNotifyUser] = useState(); //Componente Notification
+    const [showSpinner, setShowSpinner] = useState(false);
+
     const [evento, setEvento] = useState({
         dataEvento: "",
         nomeEvento: "",
         descricao: "",
         idTipoEvento: "",
-        idInstituicao: "94d8ef54-02e7-4f4f-a796-6fe3e11dde74" //!ATENÇÃO AQUI ESTÁ O ID DA INSTITUIÇÃO
-    }) //Objeto de cadastro
-    const [listEvento, setListEvento] = useState([]); //Lista de Eventos
-    const [tipoEvento, setTipoEvento] = useState([]); //Array de objetos para a utilização do options no cadastro
+        idInstituicao: "860669ec-c897-48c1-90f9-39f4113e3b8f" //!ATENÇÃO AQUI ESTÁ O ID DA INSTITUIÇÃO
+    }) //Objeto para o cadastro e a edição
 
 
     async function getTypeEvent() {
@@ -58,68 +63,115 @@ const EventosPage = () => {
         loadEventType();
     }, [])
 
-    function objectValue(dados) {
-        let dadoGenerico = [];
+    function Aviso(key) { // 1 = Titulo pelo menos 3 char, 2 = exclusão, 3 = cadastro, 4= Atualização
 
+        switch (key) {
 
-        dados.map(z => {
-            let objectGenerico = {
-                text: dados.titulo,
-                value: dados.idTipoEvento
-            };
-            dadoGenerico.push(objectGenerico);
-        })
-
-        setTipoEvento(dadoGenerico);
-        console.log(dadoGenerico);
+            case 1:
+                setNotifyUser({
+                    titleNote: "Aviso",
+                    textNote: `O titulo deve conter pelo menos 3 caracteres`,
+                    imgIcon: "warning",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            case 2:
+                setNotifyUser({
+                    titleNote: "Sucesso",
+                    textNote: `Evento excluído com sucesso`,
+                    imgIcon: "success",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            case 3:
+                setNotifyUser({
+                    titleNote: "Sucesso",
+                    textNote: `Evento cadastrado com sucesso`,
+                    imgIcon: "success",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            case 4:
+                setNotifyUser({
+                    titleNote: "Sucesso",
+                    textNote: `Evento atualizado com sucesso`,
+                    imgIcon: "success",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            default:
+                alert("Não foi colocado um Aviso adequado");
+                break;
+        }
     }
 
     function clearEvento() {
+
         setEvento({
+            ...evento,
             dataEvento: "",
-            descricao: "",
             nomeEvento: "",
-            idTipoEvento: ""
+            descricao: "",
+            idTipoEvento: "",
         })
+
+        getEvent();
     }
+
 
     // todo ****************Cadastro*******************
     async function handleSubmit(e) {
         e.preventDefault();
+
+        setShowSpinner(true);
         try {
 
-            console.log(evento);
             const retorno = await api.post(eventsResource, {
 
                 "dataEvento": evento.dataEvento,
                 "nomeEvento": evento.nomeEvento,
                 "descricao": evento.descricao,
                 "idTipoEvento": evento.idTipoEvento,
-                "idInstituicao": "94d8ef54-02e7-4f4f-a796-6fe3e11dde74"
+                "idInstituicao": evento.idInstituicao
 
             })
+            Aviso(3);
+            clearEvento();
 
         } catch (error) {
             alert("Erro na API")
             console.log(error);
         }
 
+        setShowSpinner(false);
+
     }
 
     // todo ************Apagar****************
     async function handleDelete(idEvento) {
+
+        setShowSpinner(true);
+
         try {
-            if (window.confirm("")) {
+
+            if (window.confirm(`Confirmar a exclusão do evento?`)) {
+
                 const retorno = await api.delete(eventsResource + `/${idEvento}`)
                 if (retorno.status === 204 || retorno.status === 200 || retorno.status === 202) {
-                    alert("Deleção realizada com sucesso")
-
+                    Aviso(2);
+                    clearEvento();
                 }
             }
         } catch (error) {
             alert("erro na api")
             console.log(error);
         }
+
+        setShowSpinner(false);
     }
 
     // todo ****************Editar**********************
@@ -136,10 +188,11 @@ const EventosPage = () => {
                 "nomeEvento": evento.nomeEvento,
                 "descricao": evento.descricao,
                 "idTipoEvento": evento.idTipoEvento,
-                "idInstituicao": "94d8ef54-02e7-4f4f-a796-6fe3e11dde74"
+                "idInstituicao": evento.idInstituicao
 
             }))
 
+            Aviso(4);
             clearEvento();
 
         } catch (error) {
@@ -150,25 +203,25 @@ const EventosPage = () => {
     }
 
     // todo ************Edição MOSTRAR************
-    async function showUpdate(idEvento) {
+    async function showUpdate(evento) {
         setFrmEdit(false);
 
         try {
-            const retorno = await (await api.get(eventsResource + `/${idEvento}`)).data;
 
-            console.log(retorno);
+
+            console.log(evento);
 
             setEvento({
-                ...evento,
-                idEvento: retorno.idEvento,
-                dataEvento: retorno.dataEvento,
-                descricao: retorno.descricao,
-                nomeEvento: retorno.nomeEvento,
-                idInstituicao: retorno.idInstituicao,
-                idTipoEvento: retorno.idTipoEvento
+                idEvento: evento.idEvento,
+                dataEvento: evento.dataEvento,
+                descricao: evento.descricao,
+                nomeEvento: evento.nomeEvento,
+                idInstituicao: evento.idInstituicao,
+                idTipoEvento: evento.idTipoEvento
             })
 
             window.scroll({ top: 0, left: 0, behavior: "smooth" })
+
 
 
 
@@ -190,6 +243,12 @@ const EventosPage = () => {
 
     return (
         <>
+            {/* Linha para a inclusão da notificação */}
+            <Notification {...notifyUser} setNotifyUser={setNotifyUser} />
+
+            {/* Spinner - feito com position */}
+            {showSpinner ? <Spinner /> : null}
+
             <MainContent>
                 <section className="cadastro-evento-section">
                     <Container>
@@ -234,7 +293,7 @@ const EventosPage = () => {
                                             placeholder={"Descrição"}
                                             required={"required"}
                                             type={"text"}
-                                            value={evento.descricaoEvento}
+                                            value={evento.descricao}
                                             manipulatorFunction={z =>
                                                 setEvento({
                                                     ...evento,
@@ -246,6 +305,7 @@ const EventosPage = () => {
                                             key={'TipoEvento'}
                                             required={"required"}
                                             options={tipoEvento}
+                                            defaultValue={evento.idTipoEvento}
                                             manipulatorFunction={z => {
                                                 setEvento({
                                                     ...evento,
@@ -314,6 +374,7 @@ const EventosPage = () => {
                                             key={'TipoEvento'}
                                             required={"required"}
                                             options={tipoEvento}
+                                            defaultValue={evento.idTipoEvento}
                                             manipulatorFunction={z =>
                                                 setEvento({
                                                     ...evento,

@@ -68,7 +68,7 @@ const TableTp = ({ dados, fnUpdate = null, fnDelete = null }) => {
                                     src={edtiPen}
                                     alt="Ícone de pincel, aperte para editar o referente evento"
                                     onClick={() => {
-                                        fnUpdate(tp.idEvento)
+                                        fnUpdate(tp)
                                     }}/>
                                     
                             </td>
