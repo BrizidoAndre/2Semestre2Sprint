@@ -10,6 +10,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import UseEffectPage from "./Pages/UseEffectPage/UseEffectPage";
+import InstituicaoPage from "./Pages/InstituicaoPage/InstituicaoPage";
 
 
 // Sempre nessa ordem as rotas retornam um BrowserRouter > Routes > Route
@@ -28,6 +29,7 @@ const Rotas = () => {
                     <Route element={<TestePage />} path="/testePage" />
                     <Route element={<LoginPage />} path="/loginPage" />
                     <Route element={<UseEffectPage/>} path="/useEffectPage" />
+                    <Route element={<InstituicaoPage/>} path="/instituicao" />
                 </Routes>
                 <Footer />
             </BrowserRouter>

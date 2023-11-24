@@ -9,6 +9,9 @@ export const nextEventResource = '/Evento/ListarProximos';
 // Type Events Route
 export const eventsTypeResource = '/TipoEvento'
 
+// Instituicao Route
+export const instituicaoResource = '/Instituicao'
+
 const apiPort = '7284';
 const localApiUri = `https://localhost:${apiPort}/api`;
 // const externalApiUri  = null;
