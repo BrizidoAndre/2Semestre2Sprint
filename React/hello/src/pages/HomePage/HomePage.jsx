@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ThemeContext from '../../context/ThemeContext';
 
 const Homepage = () => {
+
+    const {theme} = useContext(ThemeContext);
+
+
     return (
-        <div>
-            <h1>Página Home</h1>
-        </div>
+        <>
+            <h1>HomePage</h1>
+            <span>{theme}</span>
+            <hr />
+        </>
     );
 };
 
