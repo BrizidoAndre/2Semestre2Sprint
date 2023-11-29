@@ -1,9 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Route as Rota, BrowserRouter, Routes } from 'react-router-dom'
 import Nav from "./components/Nav/Nav";
-
-// Import dos Contextos
-import ThemeContext from "./context/ThemeContext";
 
 // import dos componentes - páginas
 import HomePage from "./pages/HomePage/HomePage";
@@ -19,21 +16,13 @@ import MyProductsPage from "./pages/MyProductsPage/MyProductsPage"
 
 const Rotas = () => {
 
-    const [theme, setTheme] = useState( getThemeLocalStorage);
-
-    // Verifica se o tema está no localStorage ou assume o tema light
-    function getThemeLocalStorage(){
-        setTheme( localStorage.getItem("theme") !== null 
-        ? localStorage.getItem("theme") 
-        : "Light" )
-    }
+    
 
     useState();//
 
 
     return (
         <BrowserRouter>
-            <ThemeContext.Provider value={{theme, setTheme}}>
 
                 <Nav />
 
@@ -46,7 +35,6 @@ const Rotas = () => {
                     <Rota element={<LoginPage />} path={"/login"} />
                 </Routes>
 
-            </ThemeContext.Provider>
         </BrowserRouter>
     );
 }

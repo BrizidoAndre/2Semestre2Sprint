@@ -6,6 +6,8 @@ Exemplo de API usado no exercício
 O Axios é uma biblioteca para requisições de http. Para o consumo de API's. Estamos usando
 O comando instala essa biblioteca no projeto.
 
+Procure pela pasta Utils para ver sua preparação e algumas das páginas para ver sua utilização
+
 Outro plugin que estamos baixando 
 
 2 - npm install react-tooltip
@@ -61,3 +63,21 @@ Para funções separadas que queremos usar nos componentes criamos uma pasta cha
 Dentro dela é onde será feia as funções para propósitos gerais.
 
 Para chamar a API nós criamos a pasta Services para automatizar a chamada das apis
+
+
+______________________________________________
+1 -
+Estamos no processo de login. Para obter o token estamos buscando na api direto
+O retorno é um token fornecido pela própria API
+Estaremos instalando um serviço que realiza a validação do token chamado JWT-DECODE
+Ele que nos fornecerá a função de login dentro do site
+
+Para baixar o serviço:
+
+-    npm i jwt-decode
+
+
+2 - Feita as funções e chamado o serviço nos resta chamar esse serviço e função em um componente que engloba todo o site
+(afinal quando queremos fazer o login, queremos que nosso token continue validado independete da página que acessamos)
+
+É por isso que estamos chamando o conjunto do arquivo "App.js" o arquivo pai de todos os componentes

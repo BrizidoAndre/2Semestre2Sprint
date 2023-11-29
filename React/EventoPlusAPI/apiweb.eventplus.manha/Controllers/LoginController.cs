@@ -36,7 +36,7 @@ namespace apiweb.eventplus.manha.Controllers
                         new Claim("IdTipoUsuario",usuarioBuscado.IdTipoUsuario.ToString()),
                         new Claim(JwtRegisteredClaimNames.Name,usuarioBuscado.Nome),
                         new Claim(JwtRegisteredClaimNames.Email,usuarioBuscado.Email),
-                        new Claim(ClaimTypes.Role,usuarioBuscado.TipoUsuario.Titulo)
+                        new Claim("role", usuarioBuscado.TipoUsuario.Titulo!)
                     };
 
                     //2º - Defiir a chave de acesso ao token

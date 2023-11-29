@@ -9,7 +9,10 @@ const Nav = () => {
     const {theme, setTheme} = useContext(ThemeContext)
 
     const toggleTheme = () => {
-        setTheme(theme === "Light" ? "Dark" : "Light");
+        const tm = theme === "Light" ? "Dark" : "Light"
+        setTheme(tm);
+        
+        localStorage.setItem("theme", tm)
     }
 
     return (
