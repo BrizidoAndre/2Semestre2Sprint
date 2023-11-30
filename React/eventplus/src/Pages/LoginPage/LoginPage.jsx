@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import "./LoginPage.css";
 
 // Importando Componentes
 import ImageIllustrator from "../../components/ImageIlustrator/ImageIlustrator";
 import { Input, Button } from "../../components/FormComponents/FormComponents";
 import api, { loginResource } from "../../Services/Service";
-import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
 // Importando as contexts
 import { UserContext, userDecodeToken } from "../../context/AuthContext";
@@ -20,6 +21,8 @@ const LoginPage = () => {
     // Importando as propriedades de nossa context através de um destructuring
     const {userData, setUserData} = useContext(UserContext); //importa os dados globais do usuário
 
+    const navigate = useNavigate();
+
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -30,11 +33,15 @@ const LoginPage = () => {
             console.log(promise.data);
 
             const userFullToken = userDecodeToken(promise.data.token);
-            // guarda o token globalmente;
-            // A função JSON.stringify;
-            setUserData(userFullToken)
 
+            // guarda o token na variável podendo ser usada em qualquer componente filho;
+            setUserData(userFullToken)
+            
+            // A função JSON.stringify transforma um ojeto em uma única string, podendo assim ser armazenada em um localStorage
             localStorage.setItem("token", JSON.stringify(userFullToken))
+
+            navigate("/")
+
 
 
         } catch (error) {
@@ -42,6 +49,7 @@ const LoginPage = () => {
             alert("Verifique os dados e a conexão com a internet")
 
             console.log("Erro no login do usuário");
+            console.log(error);
         }
     }
 

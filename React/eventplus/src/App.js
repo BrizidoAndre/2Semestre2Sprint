@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Rotas from './routes.js'
 // Importando o userContext
@@ -10,8 +10,17 @@ const App = () => {
 
     const [userData, setUserData] = useState({});
 
-    return(
-        <UserContext.Provider value={ {userData, setUserData} }>
+    useEffect(() => {
+
+        const storageValue = JSON.parse(localStorage.getItem("token"))
+
+        if (storageValue !== null) {
+            setUserData(storageValue)
+        }
+    }, [])
+
+    return (
+        <UserContext.Provider value={{ userData, setUserData }}>
             <Rotas />
         </UserContext.Provider>
     );

@@ -80,4 +80,12 @@ Para baixar o serviço:
 2 - Feita as funções e chamado o serviço nos resta chamar esse serviço e função em um componente que engloba todo o site
 (afinal quando queremos fazer o login, queremos que nosso token continue validado independete da página que acessamos)
 
-É por isso que estamos chamando o conjunto do arquivo "App.js" o arquivo pai de todos os componentes
+É por isso que estamos chamando o conjunto no arquivo "App.js" o arquivo pai de todos os componentes para ele conter as informações do usuário
+podendo assim ser usadas em qualquer parte do site
+
+3 - Com a biblioteca que baixamos nos chamamos a função jwtDecode para obter os valores do token recebido 
+Vale ressaltar que essa função pode ser realiza em um arquivo separado.
+No caso desse projeto essa função ficou em AuthContex retornando um objeto com as propriedades que nos interessa no login
+O arquivo também é o arquivo origem do objeto do UseContex
+
+4 - Chamamos as funções no arquivo LoginPage e então usamos ela para obter os valores do token obtido a partir da api

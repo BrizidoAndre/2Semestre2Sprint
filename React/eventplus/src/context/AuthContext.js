@@ -7,5 +7,5 @@ export const userDecodeToken = (theToken) => {
                     //a função que valida o token
     const decoded = jwtDecode(theToken) // objeto do payload
 
-    return { role: decoded.role, nome: decoded.name, token: theToken}
+    return { role: decoded.role, name: decoded.name, token: theToken, UserId: decoded.jti}
 }
