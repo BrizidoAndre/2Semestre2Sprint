@@ -30,7 +30,7 @@ const LoginPage = () => {
             const promise = await api.post(loginResource, user)
 
             console.log("Dados do Usuário");
-            console.log(promise.data);
+            console.log(promise.data.token);
 
             const userFullToken = userDecodeToken(promise.data.token);
 

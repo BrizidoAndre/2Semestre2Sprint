@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import "./Nav.css"
 
 // Importando logotipo das navs
@@ -7,16 +7,19 @@ import logoDesktop from '../../assets/images/logo-pink.svg';
 
 
 import { Link } from 'react-router-dom';
-            //Relembre que esses parâmetros estão
-            //sendo criados no Header 
-const Nav = ({exibeNavbar, setExibeNavbar }) => {
+import { UserContext } from '../../context/AuthContext';
+//Relembre que esses parâmetros estão
+//sendo criados no Header 
+const Nav = ({ exibeNavbar, setExibeNavbar }) => {
+
+    const { userData, setUseData } = useContext(UserContext)
 
 
     return (
         <nav className={`navbar ${exibeNavbar ? "exibeNavbar" : ""}`}>
-            <span 
+            <span
                 className='navbar__close'
-                onClick={() => {setExibeNavbar(false)}} 
+                onClick={() => { setExibeNavbar(false) }}
             >
                 x
             </span>
@@ -25,11 +28,11 @@ const Nav = ({exibeNavbar, setExibeNavbar }) => {
 
 
             <Link to="/" className='eventLogo'>
-                <img 
-                    className='eventlogo__logo-image' 
-                    src={window.innerWidth >= 992 ? logoDesktop : logoMobile} 
+                <img
+                    className='eventlogo__logo-image'
+                    src={window.innerWidth >= 992 ? logoDesktop : logoMobile}
                     alt="Event Plus Logo"
-                    onClick={() => {setExibeNavbar(false)}}
+                    onClick={() => { setExibeNavbar(false) }}
                 />
             </Link>
 
@@ -37,10 +40,42 @@ const Nav = ({exibeNavbar, setExibeNavbar }) => {
 
 
             <div className="navbar__items-box">
-                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/"}>Home</Link>
-                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/tipoEventos"}>Tipos de Evento</Link>
-                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/eventos"}>Eventos</Link>
-                <Link onClick={() => {setExibeNavbar(false)}} className='navbar__item' to={"/instituicao"}>Instituição</Link>
+
+                <Link
+                    onClick={() => { setExibeNavbar(false) }}
+                    className='navbar__item'
+                    to={"/"}
+                >Home</Link>
+                {userData.name && userData.role === "Administrador" ? (
+                    <>
+                        <Link
+                            onClick={() => { setExibeNavbar(false) }}
+                            className='navbar__item'
+                            to={"/tipoEventos"}
+                        >Tipos de Evento</Link>
+                        <Link
+                            onClick={() => { setExibeNavbar(false) }}
+                            className='navbar__item'
+                            to={"/eventos"}
+                        >Eventos</Link>
+                        <Link
+                            onClick={() => { setExibeNavbar(false) }}
+                            className='navbar__item'
+                            to={"/instituicao"}
+                        >Instituição</Link>
+                    </>
+
+                ) : (
+                    userData.name && userData.role === "Aluno" ? (
+                        <>
+                            <Link
+                                onClick={() => { setExibeNavbar(false) }}
+                                className='navbar__item'
+                                to={"/"}
+                            >Eventos Aluno</Link>
+                        </>
+                    ) : (null)
+                )}
             </div>
         </nav>
     );
