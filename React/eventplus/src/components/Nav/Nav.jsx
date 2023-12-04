@@ -71,7 +71,7 @@ const Nav = ({ exibeNavbar, setExibeNavbar }) => {
                             <Link
                                 onClick={() => { setExibeNavbar(false) }}
                                 className='navbar__item'
-                                to={"/"}
+                                to="/eventos-aluno"
                             >Eventos Aluno</Link>
                         </>
                     ) : (null)

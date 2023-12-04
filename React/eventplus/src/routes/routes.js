@@ -11,6 +11,7 @@ import Footer from "../components/Footer/Footer";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import InstituicaoPage from "../Pages/InstituicaoPage/InstituicaoPage";
 import { PrivateRoute } from "./PrivateRoute";
+import EventoAlunoPage from "../Pages/EventoAlunoPage/EventoAlunoPage";
 
 
 // Sempre nessa ordem as rotas retornam um BrowserRouter > Routes > Route
@@ -46,8 +47,17 @@ const Rotas = () => {
                     <Route
                         path="/instituicao"
                         element={
-                             <PrivateRoute redirectTo="/">
+                            <PrivateRoute redirectTo="/">
                                 <InstituicaoPage />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/eventos-aluno"
+                        element={
+                            <PrivateRoute redirectTo="/">
+                                <EventoAlunoPage/>
                             </PrivateRoute>
                         }
                     />

@@ -12,23 +12,25 @@ import ImageIlustrator from "../../components/ImageIlustrator/ImageIlustrator";
 import TableIn from "./TableIn/TableIn";
 import { logDOM } from "@testing-library/react";
 import api, { instituicaoResource } from "../../Services/Service";
+import { Input } from "../../components/FormComponents/FormComponents";
 
 const InstituicaoPage = () => {
 
-    const [instituicao, setInstituicao] = useState([]);
+    const [frmEdit, setFrmEdit] = useState(true); //state para indicar se é um cadastro ou uma edição
+    const [instituicaoList, setInstituicaoList] = useState([]); //State para listar os tipos de instituições
 
     async function getInstituicao() {
         try {
-            const request = await ( await api.get(instituicaoResource)).data
+            const request = await (await api.get(instituicaoResource)).data
 
-            setInstituicao(request)
+            setInstituicaoList(request)
         } catch (error) {
             alert("Erro na api instituição")
             console.log(error);
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         try {
             getInstituicao();
         } catch (error) {
@@ -38,7 +40,7 @@ const InstituicaoPage = () => {
     }, [])
 
 
-    async function deleteInstituicao(idInstituicao){
+    async function deleteInstituicao(idInstituicao) {
 
     }
 
@@ -54,6 +56,28 @@ const InstituicaoPage = () => {
                             <Title titleText={"Página de Instituição"} />
 
                             <ImageIlustrator imageRender={eventoImage} />
+
+                            <form
+                                className="ftipo-evento"
+                                >
+
+                                {/* Cadastro ou Edição? */}
+                                {frmEdit ? (
+
+
+                                    // Cadastro
+                                    <>
+                                    <Input/>
+                                    <Input/>
+                                    </>
+                                ): (
+
+                                    // Edição
+                                    <>
+                                    </>
+                                )}
+
+                            </form>
                         </div>
                     </Container>
                 </section>
@@ -61,12 +85,12 @@ const InstituicaoPage = () => {
                 {/* Listagem */}
                 <section className="lista-eventos-section">
                     <Container>
-                        <Title 
+                        <Title
                             titleText={"Lista de Instituições"}
                             color="white"
                         />
 
-                        <TableIn dados={instituicao} fnDelete={deleteInstituicao}/>
+                        <TableIn dados={instituicaoList} fnDelete={deleteInstituicao} />
                     </Container>
                 </section>
             </MainContent>

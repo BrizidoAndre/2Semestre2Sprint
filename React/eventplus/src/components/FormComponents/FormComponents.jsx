@@ -93,3 +93,42 @@ export const Select = ({
         </select>
     )
 }
+
+
+export const SelectMyEvents = ({
+    name,
+    id,
+    required,
+    additionalClass,
+    manipulatorFunction = null,
+    defaultValue,
+    options,
+    isEmpty = true}) => {
+
+    if (isEmpty) {
+        
+    }
+
+
+    return (
+        <select
+            name={name}
+            id={id}
+            required={required}
+            className={`input-component ${additionalClass}`}
+            onChange={manipulatorFunction}
+            value={defaultValue}
+        >
+
+            <option defaultValue value={""} hidden>Selecione o tipo de evento</option>
+            {/* options.map(???) */}
+            {
+            options.map(o => {
+                return (
+                    <option value={o.value} key={o.value}>{o.text}</option>
+                );
+            })};
+
+        </select>
+    )
+}

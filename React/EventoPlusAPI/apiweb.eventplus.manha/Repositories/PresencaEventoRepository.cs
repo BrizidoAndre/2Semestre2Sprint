@@ -1,6 +1,7 @@
 ﻿using apiweb.eventplus.manha.Contexts;
 using apiweb.eventplus.manha.Domains;
 using apiweb.eventplus.manha.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace apiweb.eventplus.manha.Repositories
 {
@@ -83,7 +84,27 @@ namespace apiweb.eventplus.manha.Repositories
             try
             {
 
-                return _eventContext.PresencaEvento.Where(z => z.IdUsuario == id).ToList();
+                return _eventContext.PresencaEvento.Select(p => new PresencaEvento
+                {
+                    IdPresencaEvento = p.IdPresencaEvento,
+                    Situacao = p.Situacao,
+                    IdUsuario = p.IdUsuario,
+
+                    Evento = new Evento
+                    {
+                        IdEvento = p.IdEvento,
+                        DataEvento = p.Evento!.DataEvento,
+                        NomeEvento = p.Evento.NomeEvento,
+                        Descricao = p.Evento.Descricao,
+
+                        Instituicao = new Instituicao
+                        {
+                            IdInstituicao = p.Evento.IdInstituicao,
+                            NomeFantasia = p.Evento.Instituicao!.NomeFantasia
+                        }
+                    }
+
+                }).Where(z => z.IdUsuario == id).ToList();
             }
             catch (Exception)
             {
@@ -91,5 +112,6 @@ namespace apiweb.eventplus.manha.Repositories
                 throw;
             }
         }
+
     }
 }

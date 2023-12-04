@@ -25,6 +25,10 @@ const EventosPage = () => {
     const [notifyUser, setNotifyUser] = useState(); //Componente Notification
     const [showSpinner, setShowSpinner] = useState(false);
 
+    const [listTipoEvento, setListTipoEvento] = useState([{
+        value: "",
+        text: ""
+    }]); //Array de objetos para a utilização do select
     const [evento, setEvento] = useState({
         dataEvento: "",
         nomeEvento: "",
@@ -37,13 +41,26 @@ const EventosPage = () => {
     async function getTypeEvent() {
         // Lista do Tipo de eventos
         const tipoEventos = await api.get(eventsTypeResource);
-        setTipoEvento(tipoEventos.data);
+        setTipoEvento(tipoEventos.data)
+
+        ListTypeTransform();
     }
 
     async function getEvent() {
         // Lista dos Eventos
         const eventos = await (await api.get(eventsResource)).data
         setListEvento(eventos);
+    }
+
+    function ListTypeTransform() {
+        
+        const list = tipoEvento.map((e) => ({
+            value: e.idTipoEvento,
+            text: e.titulo
+        }))
+
+        setListTipoEvento(list);
+
     }
 
     useEffect(() => {
@@ -62,6 +79,7 @@ const EventosPage = () => {
 
         loadEventType();
     }, [])
+
 
     function Aviso(key) { // 1 = Titulo pelo menos 3 char, 2 = exclusão, 3 = cadastro, 4= Atualização
 
@@ -378,7 +396,7 @@ const EventosPage = () => {
                                             manipulatorFunction={z =>
                                                 setEvento({
                                                     ...evento,
-                                                    "idTipoEvento": z.target.value
+                                                    idTipoEvento: z.target.value
                                                 })}
                                         />
                                         <Input
