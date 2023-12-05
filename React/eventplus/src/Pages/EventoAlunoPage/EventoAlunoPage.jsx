@@ -46,15 +46,15 @@ const EventoAlunoPage = () => {
             }
 
         }
-        else { //os eventos do aluno
+        else if (tipoEvento === "2") { //os eventos do aluno
             try {
                 // Listar os eventos do aluno
                 const request = (await (await api.get(`${presenceEventResource}/${userData.UserId}`)).data);
 
                 const arrEventos = [];
-                
-                request.forEach( e => {
-                  arrEventos.push(e.evento) 
+
+                request.forEach(e => {
+                    arrEventos.push(e.evento)
                 });
 
                 setEventos(arrEventos)
@@ -65,11 +65,26 @@ const EventoAlunoPage = () => {
             }
 
         }
+        else {
+            setEventos([]);
+        }
     }
 
     useEffect(() => {
         LoadEvents();
     }, [tipoEvento]);
+
+
+    const verificaPresença = (arrAllEvents, eventsUser) => {
+        for (let x = 0; x < arrAllEvents.length; x++) { //para cada evento
+            for (let i = 0; i < eventsUser.length; i++) { // procurar a corre
+                if (arrAllEvents[x].idEvento === eventsUser[i].idEvento) {
+                    arrAllEvents[x].situacao = true;
+                    break; //paro de procurar para o evento principal atual
+                }
+            }
+        }
+    }
 
     // toggle meus eventos ou todos os eventos
     function myEvents(tpEvent) {
