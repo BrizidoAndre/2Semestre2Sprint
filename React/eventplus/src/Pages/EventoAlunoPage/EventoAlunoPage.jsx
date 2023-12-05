@@ -11,19 +11,21 @@ import api, { eventsResource, nextEventResource, presenceEventResource } from ".
 
 import "./EventoAlunoPage.css";
 import { UserContext } from "../../context/AuthContext";
+import Notification from "../../components/Notification/Notification";
 
 const EventoAlunoPage = () => {
     // state do menu mobile
     const [exibeNavbar, setExibeNavbar] = useState(false);
     const [eventos, setEventos] = useState([]); //Eventos para serem buscados
-    const [eventoAluno, setEventoALuno] = useState([]); //Eventos do aluno a serem  
     // select mocado
     const [quaisEventos, setQuaisEventos] = useState([
         { value: 1, text: "Todos os eventos" },
         { value: 2, text: "Meus eventos" },
     ]);
 
-    const [tipoEvento, setTipoEvento] = useState(1); //código do tipo do Evento escolhido
+    const [notifyUser, setNotifyUser] = useState(); //Componente Notification
+
+    const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido É UMA STRING
     const [showSpinner, setShowSpinner] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -31,33 +33,41 @@ const EventoAlunoPage = () => {
     const { userData, setUserData } = useContext(UserContext);
 
     async function LoadEvents() {
-        console.log(tipoEvento);
-        if (tipoEvento === 1) {
+        if (tipoEvento === "1") { // os eventos completos
             try {
+                // listar os aventos
                 const request = (await (await api.get(eventsResource)).data);
 
                 setEventos(request)
 
             } catch (error) {
                 alert("Erro em carregar todos os eventos ")
+                console.log(error);
             }
 
         }
-        else {
+        else { //os eventos do aluno
             try {
+                // Listar os eventos do aluno
                 const request = (await (await api.get(`${presenceEventResource}/${userData.UserId}`)).data);
-                setEventos(request)
-                console.log(request);
+
+                const arrEventos = [];
+                
+                request.forEach( e => {
+                  arrEventos.push(e.evento) 
+                });
+
+                setEventos(arrEventos)
 
             } catch (error) {
                 alert("Erro em carregar os eventos do aluno")
+                console.log(error);
             }
 
         }
     }
 
     useEffect(() => {
-        console.log(tipoEvento);
         LoadEvents();
     }, [tipoEvento]);
 
@@ -83,6 +93,8 @@ const EventoAlunoPage = () => {
     }
     return (
         <>
+            {/* Linha para a inclusão da notificação */}
+            <Notification {...notifyUser} setNotifyUser={setNotifyUser} />
 
             <MainContent>
                 <Container>
