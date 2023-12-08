@@ -37,8 +37,12 @@ const EventoAlunoPage = () => {
     const [idEvento, setIdEvento]  = useState();
     // Texto do comentário
     const [comentario, setComentario] = useState();
+    // Texto do novo comentário
+    const [novoComentario, setNovoComentario] = useState("");
 
-    const [comentarioNovo , setComentarioNovo] = useState("");
+    // Id do comentário cadastrado
+    const [idComentario, setIdComentario] = useState();
+
 
     async function LoadEvents() {
         if (tipoEvento === "1") { // os eventos completos
@@ -117,7 +121,13 @@ const EventoAlunoPage = () => {
         if (showModal) { //Um if para quando fecharmos o modal não fazer a requisição novamente
             return;
         }
-        console.log(idEvento);
+        setUserData({
+            ...userData,
+            idEvento: idEvento
+        })
+
+        setIdEvento(idEvento)
+
         loadMyCommentary(idEvento);
     };
 
@@ -127,21 +137,32 @@ const EventoAlunoPage = () => {
         const request = await api.get(`${commentEventResource}/BuscarPorIdUsuario?idAluno=${userData.UserId}&idEvento=${id}`)
 
         setComentario(request.data.descricao)
+        setIdComentario(request.data.idComentarioEvento)
     }
 
     // Cadastra um comentário
     async function postMyCommentary() {
+
         const request = api.post(commentEventResource, {
-            descricao: comentarioNovo,
+            descricao: novoComentario,
             exibe: true,
             idUsuario: userData.UserId,
             idEvento: idEvento
-        })
+        });
+
+        const chamado = await api.get(`${commentEventResource}/BuscarPorIdUsuario?idAluno=${userData.UserId}&idEvento=${idEvento}`)
+
+        setComentario(chamado.data.descricao)
     }
 
     // remove o comentário
     async function removeMyCommentary(){
-        alert("Remover o comentário");
+        console.log(idComentario);
+
+        const request = await api.delete(`${commentEventResource}/${idComentario}`)
+
+        setComentario("Comentário Deletado!")
+
     };
 
     async function handleConnect(idEvento, whatTheFunction, presencaId = null) {
@@ -228,7 +249,11 @@ const EventoAlunoPage = () => {
                     fnDelete={removeMyCommentary}
                     comentaryText={comentario}
 
-                    setNewComentary={setComentarioNovo}
+                    fnGet={loadMyCommentary}
+
+                    newComentary={novoComentario}
+                    setNewComentary={setNovoComentario}
+
                 />
             ) : null}
         </>
