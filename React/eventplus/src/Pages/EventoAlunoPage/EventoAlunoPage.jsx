@@ -7,7 +7,7 @@ import Container from "../../components/Container/Container";
 import { Select, SelectMyEvents } from "../../components/FormComponents/FormComponents";
 import Spinner from "../../components/Spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
-import api, { eventsResource, nextEventResource, presenceEventResource } from "../../Services/Service";
+import api, { commentEventResource, eventsResource, nextEventResource, presenceEventResource } from "../../Services/Service";
 
 import "./EventoAlunoPage.css";
 import { UserContext } from "../../context/AuthContext";
@@ -23,6 +23,8 @@ const EventoAlunoPage = () => {
         { value: 2, text: "Meus eventos" },
     ]);
 
+    
+
     const [notifyUser, setNotifyUser] = useState(); //Componente Notification
 
     const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido É UMA STRING
@@ -31,6 +33,12 @@ const EventoAlunoPage = () => {
 
     // recupera os dados globais do usuário
     const { userData, setUserData } = useContext(UserContext);
+    // ID do Evento
+    const [idEvento, setIdEvento]  = useState();
+    // Texto do comentário
+    const [comentario, setComentario] = useState();
+
+    const [comentarioNovo , setComentarioNovo] = useState("");
 
     async function LoadEvents() {
         if (tipoEvento === "1") { // os eventos completos
@@ -102,18 +110,33 @@ const EventoAlunoPage = () => {
         setTipoEvento(tpEvent);
     }
 
-    const showHideModal = () => {
+    const showHideModal = (idEvento) => {
+
         setShowModal(showModal ? false : true);
+
+        if (showModal) { //Um if para quando fecharmos o modal não fazer a requisição novamente
+            return;
+        }
+        console.log(idEvento);
+        loadMyCommentary(idEvento);
     };
 
     // ler um comentário
-    async function loadMyCommentary(idComentary) {
-        return "Carrega o comentario";
+    async function loadMyCommentary(id) {
+
+        const request = await api.get(`${commentEventResource}/BuscarPorIdUsuario?idAluno=${userData.UserId}&idEvento=${id}`)
+
+        setComentario(request.data.descricao)
     }
 
     // Cadastra um comentário
-    async function postMyCommentary(idComentary) {
-        return "Posta um comentário";
+    async function postMyCommentary() {
+        const request = api.post(commentEventResource, {
+            descricao: comentarioNovo,
+            exibe: true,
+            idUsuario: userData.UserId,
+            idEvento: idEvento
+        })
     }
 
     // remove o comentário
@@ -189,9 +212,7 @@ const EventoAlunoPage = () => {
                     <Table
                         dados={eventos}
                         fnConnect={handleConnect}
-                        fnShowModal={() => {
-                            showHideModal();
-                        }}
+                        fnShowModal={showHideModal}
                     />
                 </Container>
             </MainContent>
@@ -203,10 +224,11 @@ const EventoAlunoPage = () => {
                 <Modal
                     userId={userData.userId}
                     showHideModal={showHideModal}
-                    fnGet={loadMyCommentary}
                     fnPost={postMyCommentary}
                     fnDelete={removeMyCommentary}
+                    comentaryText={comentario}
 
+                    setNewComentary={setComentarioNovo}
                 />
             ) : null}
         </>

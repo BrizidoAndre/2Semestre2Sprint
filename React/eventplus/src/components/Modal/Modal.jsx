@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import trashDelete from "../../assets/images/trash-delete-red.png";
+import { UserContext } from "../../context/AuthContext";
 
 import { Button, Input } from "../FormComponents/FormComponents";
 import "./Modal.css";
@@ -7,7 +8,8 @@ import "./Modal.css";
 const Modal = ({
   modalTitle = "Feedback",
   comentaryText = "Não informado. Não informado. Não informado.",
-  userId = null,
+  newComentary,
+  setNewComentary = null,
   showHideModal = false,
   fnGet = null,
   fnPost = null,
@@ -16,10 +18,11 @@ const Modal = ({
 
 }) => {
 
+  const {userData} = useContext(UserContext);
+
 
   useEffect(() => { 
     async function carregarDados() {
-      fnGet();
     }
     carregarDados();
   } , [])
@@ -55,12 +58,16 @@ const Modal = ({
         <Input
           placeholder="Escreva seu comentário..."
           additionalClass="comentary__entry"
+          type={"text"}
+          value={newComentary}
+          manipulatorFunction={setNewComentary}
+          required={"required"}
         />
 
         <Button
           textButton={"Comentar"}
           additionalClass="comentary__button"
-          manipulatorFunction={fnNewCommentary}
+          manipulatorFunction={fnPost}
         />
       </article>
     </div>

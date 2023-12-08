@@ -39,21 +39,6 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
               <td className="tbal-data__data tbal-data__data--big">
                 {e.nomeEvento}
               </td>
-              {/* <td
-                className="tbal-data__data tbal-data__data--big tbal-data__data--handover"
-                data-tooltip-id="description-tooltip"
-                data-tooltip-content={e.descricao}
-                data-tooltip-place="top"
-              >
-                {e.descricao.substr(0, 15)} ...
-                <Tooltip
-                  id="description-tooltip"
-                  className="custom-tootip"
-                />
-              </td> */}
-              {/* <td className="tbal-data__data tbal-data__data--big">
-                {e.tiposEvento.titulo}
-              </td> */}
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* {e.dataEvento} */}
                 {dateFormatDbToViewEfetivo(e.dataEvento)}
@@ -65,7 +50,7 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
                   idevento={e.idEvento}
                   src={comentaryIcon}
                   alt=""
-                  onClick={fnShowModal}
+                  onClick={() => {fnShowModal(e.idEvento)}}
                 />
 
                 <ToggleSwitch
