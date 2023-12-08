@@ -9,5 +9,7 @@ namespace apiweb.eventplus.manha.Interfaces
         List<PresencaEvento> Listar();
         List<PresencaEvento> ListarMinhaPresenca(Guid id);
         void Atualizar(Guid id, PresencaEvento presencaEvento);
+
+        PresencaEvento ListarPresenca(Guid id);
     }
 }

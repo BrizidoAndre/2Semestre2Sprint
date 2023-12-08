@@ -36,12 +36,13 @@ const EventoAlunoPage = () => {
         if (tipoEvento === "1") { // os eventos completos
             try {
                 // listar os aventos
-                const request = (await (await api.get(eventsResource)).data);
+                const todoEvento = (await (await api.get(eventsResource)).data);
+                const meuEvento = await (await api.get(`${presenceEventResource}/${userData.UserId}`)).data
+                const eventosMarcados = verificaPresença(todoEvento, meuEvento)
 
-                setEventos(request)
+                setEventos(eventosMarcados);
 
             } catch (error) {
-                alert("Erro em carregar todos os eventos ")
                 console.log(error);
             }
 
@@ -53,9 +54,12 @@ const EventoAlunoPage = () => {
 
                 const arrEventos = [];
 
-                request.forEach(e => {
-                    arrEventos.push(e.evento)
-                });
+                request.map((pr) => {
+                    arrEventos.push({
+                         ...pr.evento, 
+                         situacao: true,
+                        idPresencaEvento: pr.idPresencaEvento})
+                })
 
                 setEventos(arrEventos)
 
@@ -72,18 +76,25 @@ const EventoAlunoPage = () => {
 
     useEffect(() => {
         LoadEvents();
-    }, [tipoEvento]);
+    }, [tipoEvento, userData.UserId]);
 
 
     const verificaPresença = (arrAllEvents, eventsUser) => {
+
         for (let x = 0; x < arrAllEvents.length; x++) { //para cada evento
+
             for (let i = 0; i < eventsUser.length; i++) { // procurar a corre
+
                 if (arrAllEvents[x].idEvento === eventsUser[i].idEvento) {
+
                     arrAllEvents[x].situacao = true;
+                    arrAllEvents[x].idPresencaEvento = eventsUser[i].idPresencaEvento
                     break; //paro de procurar para o evento principal atual
                 }
             }
         }
+
+        return arrAllEvents;
     }
 
     // toggle meus eventos ou todos os eventos
@@ -91,21 +102,61 @@ const EventoAlunoPage = () => {
         setTipoEvento(tpEvent);
     }
 
-    async function loadMyComentary(idComentary) {
-        return "????";
-    }
-
     const showHideModal = () => {
         setShowModal(showModal ? false : true);
     };
 
-    const commentaryRemove = () => {
+    // ler um comentário
+    async function loadMyCommentary(idComentary) {
+        return "Carrega o comentario";
+    }
+
+    // Cadastra um comentário
+    async function postMyCommentary(idComentary) {
+        return "Posta um comentário";
+    }
+
+    // remove o comentário
+    async function removeMyCommentary(){
         alert("Remover o comentário");
     };
 
-    function handleConnect() {
-        alert("Desenvolver a função conectar evento");
+    async function handleConnect(idEvento, whatTheFunction, presencaId = null) {
+
+        if (whatTheFunction === "connect") {
+            try {
+                const obj = {
+                    situacao: true,
+                    idUsuario: userData.UserId,
+                    idEvento: idEvento
+                }
+
+                const retorno = await api.post(presenceEventResource, obj)
+
+                if (retorno.status === 201 || retorno.status === 200 || retorno.status === 204) {
+                    LoadEvents();
+                }
+
+
+            } catch (error) {
+                alert(error)
+            }
+            return;
+        }
+
+        try {
+            const unconnected = await api.delete(`${presenceEventResource}/${presencaId}`);
+
+            if (unconnected.status === 201 || unconnected.status === 200 || unconnected.status === 204) {
+                LoadEvents();
+            }
+
+        } catch (error) {
+            alert("Erro na deleção da presença")
+            console.log(error)
+        }
     }
+
     return (
         <>
             {/* Linha para a inclusão da notificação */}
@@ -152,7 +203,9 @@ const EventoAlunoPage = () => {
                 <Modal
                     userId={userData.userId}
                     showHideModal={showHideModal}
-                    fnDelete={commentaryRemove}
+                    fnGet={loadMyCommentary}
+                    fnPost={postMyCommentary}
+                    fnDelete={removeMyCommentary}
 
                 />
             ) : null}

@@ -86,6 +86,7 @@ namespace apiweb.eventplus.manha.Repositories
 
                 return _eventContext.PresencaEvento.Select(p => new PresencaEvento
                 {
+                    IdEvento = p.IdEvento,
                     IdPresencaEvento = p.IdPresencaEvento,
                     Situacao = p.Situacao,
                     IdUsuario = p.IdUsuario,
@@ -111,6 +112,34 @@ namespace apiweb.eventplus.manha.Repositories
 
                 throw;
             }
+        }
+
+
+        public PresencaEvento ListarPresenca(Guid id)
+        {
+            return _eventContext.PresencaEvento.Select(p => new PresencaEvento
+            {
+                IdPresencaEvento = p.IdPresencaEvento,
+                Situacao = p.Situacao,
+                IdUsuario = p.IdUsuario,
+                IdEvento = p.IdEvento,
+
+                Evento = new Evento
+                {
+                    IdEvento = p.IdEvento,
+                    DataEvento = p.Evento!.DataEvento,
+                    NomeEvento = p.Evento.NomeEvento,
+                    Descricao = p.Evento.Descricao,
+                    IdTipoEvento = p.Evento.IdTipoEvento,
+
+                    Instituicao = new Instituicao
+                    {
+                        IdInstituicao = p.Evento.IdInstituicao,
+                        NomeFantasia = p.Evento.Instituicao!.NomeFantasia
+                    }
+                }
+
+            }).FirstOrDefault(z => z.IdPresencaEvento == id)!;
         }
 
     }

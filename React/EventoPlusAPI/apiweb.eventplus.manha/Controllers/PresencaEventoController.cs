@@ -89,5 +89,19 @@ namespace apiweb.eventplus.manha.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("ListarPresenca/{id}")]
+        public IActionResult Get(Guid id)
+        {
+            try
+            {
+                return Ok(_presencaRepository.ListarPresenca(id));
+            }
+
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
