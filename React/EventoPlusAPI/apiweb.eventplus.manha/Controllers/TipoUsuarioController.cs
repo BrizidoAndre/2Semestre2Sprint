@@ -21,7 +21,6 @@ namespace apiweb.eventplus.manha.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Listar()
         {
             try
@@ -36,7 +35,6 @@ namespace apiweb.eventplus.manha.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Post(TipoUsuario tipoUsuario)
         {
             try

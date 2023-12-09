@@ -3339,19 +3339,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\51910007811\\.nuget\\packages\\": {}
+    "C:\\Users\\abriz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\51910007811\\Desktop\\2Semestre2Sprint\\React\\EventoPlusAPI\\apiweb.eventplus.manha\\apiweb.eventplus.manha.csproj",
+      "projectUniqueName": "C:\\Users\\abriz\\Desktop\\2Semestre2Sprint\\React\\EventoPlusAPI\\apiweb.eventplus.manha\\apiweb.eventplus.manha.csproj",
       "projectName": "apiweb.eventplus.manha",
-      "projectPath": "C:\\Users\\51910007811\\Desktop\\2Semestre2Sprint\\React\\EventoPlusAPI\\apiweb.eventplus.manha\\apiweb.eventplus.manha.csproj",
-      "packagesPath": "C:\\Users\\51910007811\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\51910007811\\Desktop\\2Semestre2Sprint\\React\\EventoPlusAPI\\apiweb.eventplus.manha\\obj\\",
+      "projectPath": "C:\\Users\\abriz\\Desktop\\2Semestre2Sprint\\React\\EventoPlusAPI\\apiweb.eventplus.manha\\apiweb.eventplus.manha.csproj",
+      "packagesPath": "C:\\Users\\abriz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\abriz\\Desktop\\2Semestre2Sprint\\React\\EventoPlusAPI\\apiweb.eventplus.manha\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\51910007811\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\abriz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3429,6 +3429,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -3437,7 +3455,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

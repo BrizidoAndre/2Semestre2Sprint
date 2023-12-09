@@ -7,7 +7,7 @@ import "./Modal.css";
 
 const Modal = ({
   modalTitle = "Feedback",
-  comentaryText = "Não informado. Não informado. Não informado.",
+  comentaryText = "Não informado.",
 
   newComentary,
   setNewComentary = null,

@@ -7,7 +7,7 @@ import Container from "../../components/Container/Container";
 import { Select, SelectMyEvents } from "../../components/FormComponents/FormComponents";
 import Spinner from "../../components/Spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
-import api, { commentEventResource, eventsResource, nextEventResource, presenceEventResource } from "../../Services/Service";
+import api, { commentEventResource, eventsResource, presenceEventResource } from "../../Services/Service";
 
 import "./EventoAlunoPage.css";
 import { UserContext } from "../../context/AuthContext";
@@ -23,7 +23,7 @@ const EventoAlunoPage = () => {
         { value: 2, text: "Meus eventos" },
     ]);
 
-    
+
 
     const [notifyUser, setNotifyUser] = useState(); //Componente Notification
 
@@ -34,14 +34,18 @@ const EventoAlunoPage = () => {
     // recupera os dados globais do usuário
     const { userData, setUserData } = useContext(UserContext);
     // ID do Evento
-    const [idEvento, setIdEvento]  = useState();
+    const [idEvento, setIdEvento] = useState();
     // Texto do comentário
     const [comentario, setComentario] = useState();
-    // Texto do novo comentário
+    // Texto do novo comentário a ser postado
     const [novoComentario, setNovoComentario] = useState("");
 
     // Id do comentário cadastrado
     const [idComentario, setIdComentario] = useState();
+
+    useEffect(() => {
+        LoadEvents();
+    }, [tipoEvento, userData.UserId]);
 
 
     async function LoadEvents() {
@@ -68,9 +72,10 @@ const EventoAlunoPage = () => {
 
                 request.map((pr) => {
                     arrEventos.push({
-                         ...pr.evento, 
-                         situacao: true,
-                        idPresencaEvento: pr.idPresencaEvento})
+                        ...pr.evento,
+                        situacao: true,
+                        idPresencaEvento: pr.idPresencaEvento
+                    })
                 })
 
                 setEventos(arrEventos)
@@ -86,9 +91,59 @@ const EventoAlunoPage = () => {
         }
     }
 
-    useEffect(() => {
-        LoadEvents();
-    }, [tipoEvento, userData.UserId]);
+
+    function Aviso(key) { // 1 = Comentário pelo menos 3 char, 2 = exclusão, 3 = cadastro, 4= Atualização
+
+        switch (key) {
+
+            case 1:
+                setNotifyUser({
+                    titleNote: "Aviso",
+                    textNote: `O Comentário deve conter pelo menos 3 caracteres`,
+                    imgIcon: "warning",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            case 2:
+                setNotifyUser({
+                    titleNote: "Sucesso",
+                    textNote: `Comentário excluído com sucesso`,
+                    imgIcon: "success",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            case 3:
+                setNotifyUser({
+                    titleNote: "Sucesso",
+                    textNote: `Comentário cadastrado com sucesso`,
+                    imgIcon: "success",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            case 4:
+                setNotifyUser({
+                    titleNote: "Sucesso",
+                    textNote: `Comentário atualizado com sucesso`,
+                    imgIcon: "success",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+            default:
+                setNotifyUser({
+                    titleNote: "Aviso",
+                    textNote: `${key}`,
+                    imgIcon: "warning",
+                    imgAlt: "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok",
+                    showMessage: true
+                });
+                break;
+        }
+    }
+
 
 
     const verificaPresença = (arrAllEvents, eventsUser) => {
@@ -152,16 +207,24 @@ const EventoAlunoPage = () => {
 
         const chamado = await api.get(`${commentEventResource}/BuscarPorIdUsuario?idAluno=${userData.UserId}&idEvento=${idEvento}`)
 
-        setComentario(chamado.data.descricao)
+        setComentario(novoComentario);
+        setNovoComentario("");
+        Aviso(3);
     }
 
     // remove o comentário
-    async function removeMyCommentary(){
-        console.log(idComentario);
+    async function removeMyCommentary() {
 
-        const request = await api.delete(`${commentEventResource}/${idComentario}`)
+        try {
+            const request = await api.delete(`${commentEventResource}/${idComentario}`)
 
-        setComentario("Comentário Deletado!")
+            setComentario("Comentário Deletado!")
+
+            Aviso(2);
+
+        } catch (error) {
+            Aviso("Não há nada para se deletar!")
+        }
 
     };
 
