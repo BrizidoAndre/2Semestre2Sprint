@@ -1,6 +1,9 @@
 ﻿using apiweb.eventplus.manha.Domains;
 using apiweb.eventplus.manha.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.CognitiveServices.ContentModerator;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace apiweb.eventplus.manha.Controllers
 {
@@ -10,6 +13,13 @@ namespace apiweb.eventplus.manha.Controllers
     public class ComentarioEventoController : Controller
     {
         ComentarioEventoRepository comentario = new ComentarioEventoRepository();
+
+        private readonly ContentModeratorClient _contentModeratorClient;
+
+        public ComentarioEventoController(ContentModeratorClient contentModeratorClient)
+        {
+            _contentModeratorClient = contentModeratorClient;
+        }
 
         [HttpGet]
         public IActionResult Get()
@@ -61,6 +71,54 @@ namespace apiweb.eventplus.manha.Controllers
             {
                 comentario.Deletar(id);
                 return StatusCode(204);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarSomenteExibe")]
+        public IActionResult GetExibe()
+        {
+            try
+            {
+                return Ok(comentario.ListarSomenteExibe());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("ComentarioIA")]
+        public async Task<IActionResult> PostIA(ComentarioEvento _comentarioEvento)
+        {
+            try
+            {
+                if (_comentarioEvento.Descricao.IsNullOrEmpty())
+                {
+                    return BadRequest("O comentário está vazio");
+                }
+
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(_comentarioEvento.Descricao));
+
+                var moderationResult = await _contentModeratorClient.TextModeration.ScreenTextAsync("text/plain", stream, "por", false, false, null, true);
+
+                if (moderationResult.Terms != null)
+                {
+                    _comentarioEvento.Exibe = false;
+
+                    comentario.Cadastrar(_comentarioEvento);
+                }
+                else
+                {
+                    _comentarioEvento.Exibe = false;
+
+                    comentario.Cadastrar(_comentarioEvento);
+                }
+
+                return StatusCode(201,_comentarioEvento);
             }
             catch (Exception e)
             {

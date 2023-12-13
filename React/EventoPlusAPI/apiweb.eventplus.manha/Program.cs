@@ -1,3 +1,4 @@
+using Microsoft.Azure.CognitiveServices.ContentModerator;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -68,6 +69,9 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
+    //Adicionar dentro de AddSwaggerGen
+    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
 
     //BLOCO DE CÓDIGO PARA APARECER UM INPUT DE AUTENTICAÇÃO NO SWAGGER
     //NESSE INPUT NÓS DEVEMOS SEMPRE COLOCAR UM "Bearer" ANTES DE COLOCAR UM TOKEN
@@ -99,6 +103,8 @@ builder.Services.AddSwaggerGen(options =>
 
     // FIM DO BLOCO DE CÓDIGO PARA AUTENTICAÇÃO DO SWAGGER
 
+
+
 });
 
 builder.Services.AddCors(options =>
@@ -113,22 +119,60 @@ builder.Services.AddCors(options =>
 
 
 
+
+//Config do Servico Content Moderator Azure
+builder.Services.AddSingleton(provider => new ContentModeratorClient(
+    //Chave fornecida pela Azure
+    new ApiKeyServiceClientCredentials("840716977ccf4aa88b34b88c3781fc40")) //o valor entre parenteses é a credencial individual de cada um.
+{
+    //EndPoint Disponivel Pelo Azure
+    Endpoint = "https://eventplusmoderator-andre.cognitiveservices.azure.com/"
+});
+
+
+
 var app = builder.Build();
 
-//Começa a configuração do Swagger
+//Alterar dados do Swagger para a seguinte configuração
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
+app.UseSwagger(options =>
+{
+    options.SerializeAsV2 = true;
+});
+
+app.UseSwaggerUI();
+
+//Para atender à interface do usuário do Swagger na raiz do aplicativo
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
 
+// ESSE BLOCO DE CÓDIGO ERA USADO PARA ACESSAR A API LOCALMENTE
+
+////Começa a configuração do Swagger
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+//app.UseSwaggerUI(options =>
+//{
+//    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//    options.RoutePrefix = string.Empty;
+//});
+
+
+
 app.UseCors("MyPolicy");
+
+app.UseRouting();
 
 //Finaliza a configuração Swagger
 app.MapControllers();

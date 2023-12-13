@@ -1,5 +1,6 @@
 ﻿using apiweb.eventplus.manha.Contexts;
 using apiweb.eventplus.manha.Domains;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace apiweb.eventplus.manha.Repositories
 {
@@ -9,6 +10,28 @@ namespace apiweb.eventplus.manha.Repositories
         public List<ComentarioEvento> Listar()
         {
             return _eventContext.ComentarioEvento.ToList();
+        }
+
+        public List<ComentarioEvento> ListarSomenteExibe()
+        {
+            return (_eventContext.ComentarioEvento.Select(z => new ComentarioEvento
+            {
+                IdComentarioEvento = z.IdComentarioEvento,
+                Descricao = z.Descricao,
+                Exibe = z.Exibe,
+                IdUsuario = z.IdUsuario,
+                IdEvento = z.IdEvento,
+
+                Usuario = new Usuario
+                {
+                    Nome = z.Usuario.Nome
+                },
+
+                Evento = new Evento
+                {
+                    NomeEvento = z.Evento.NomeEvento
+                }
+            }).Where(z => z.Exibe == true).ToList());
         }
 
         

@@ -34,7 +34,7 @@ const EventosPage = () => {
         nomeEvento: "",
         descricao: "",
         idTipoEvento: "",
-        idInstituicao: "860669ec-c897-48c1-90f9-39f4113e3b8f" //!ATENÇÃO AQUI ESTÁ O ID DA INSTITUIÇÃO
+        idInstituicao: "69d6be5f-7bbc-4ef7-8fa8-4895dd164ab9" //!ATENÇÃO AQUI ESTÁ O ID DA INSTITUIÇÃO
     }) //Objeto para o cadastro e a edição
 
 
@@ -212,6 +212,7 @@ const EventosPage = () => {
 
             Aviso(4);
             clearEvento();
+            setFrmEdit(true);
 
         } catch (error) {
             alert("Erro no update")

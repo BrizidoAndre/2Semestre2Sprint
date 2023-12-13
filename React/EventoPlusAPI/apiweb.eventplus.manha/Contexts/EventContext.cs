@@ -15,7 +15,11 @@ namespace apiweb.eventplus.manha.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=BRIZIDOS; Database= Event+_manha;Trusted_Connection=True; TrustServerCertificate=true;");
+            //string de conexão local SSMS
+            //optionsBuilder.UseSqlServer("Server=NOTE07-S15; Database= Event+_manha;User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
+
+            //String de conexão nuvem Azure
+            optionsBuilder.UseSqlServer("Server=tcp:eventmanhaandre-server.database.windows.net,1433;Initial Catalog=eventmanhadatabaseandre;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30; User Id = eventmanhaandre-server; Pwd = Senai@134");
             base.OnConfiguring(optionsBuilder);
         }
 

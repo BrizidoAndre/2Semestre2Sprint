@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/evebtwebapi-andre/apis/eventwebapi-andre",
+      "type": "apis.azure"
+    }
+  }
+}
