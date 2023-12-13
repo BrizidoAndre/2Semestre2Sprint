@@ -15,6 +15,7 @@ import api, { eventsResource, eventsTypeResource } from '../../Services/Service'
 import TableTp from './TableTp/TableTp';
 import Spinner from '../../components/Spinner/Spinner';
 
+// Importando função
 import { dateFormatDbToViewEfetivo, dateFormatDbToViewEfetivoContrario } from '../../Utils/stringFunctions';
 
 

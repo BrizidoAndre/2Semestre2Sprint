@@ -9,13 +9,14 @@ import VisionSection from '../../components/VisionSection/VisionSection';
 import ContactSection from '../../components/ContactSection/ContactSection';
 import NextEvent from '../../components/NextEvent/NextEvent';
 import Container from '../../components/Container/Container';
-import api from '../../Services/Service';
+import api, { eventsResource } from '../../Services/Service';
 
 import { nextEventResource } from '../../Services/Service';
 
 const HomePage = () => {
     //dados em "mocados"
     const [nextEvents, setNextEvents] = useState([]);
+    const [backEvents, setBackEvents] = useState([]);
 
     //roda somente na inicialização do componente
     useEffect(() => {
@@ -25,13 +26,25 @@ const HomePage = () => {
                 const dados = await promise.data;
 
                 setNextEvents(dados); //atualiza o state
-                console.log(dados);
             } catch (error) {
-                alert("Deu ruim na api!")
+                console.log(error);
+            }
+        }
+
+        async function getBackEvents() {
+            try {
+                const request = await api.get(`${eventsResource}/ListarAnteriores`)
+
+                setBackEvents(request.data)
+                
+            } catch (error) {
+                alert("Deu ruim no back Events")
+                console.log(error);
             }
         }
 
         getNextEvents(); //roda a função
+        getBackEvents(); //roda a outra função
     }, [])
 
 
@@ -58,7 +71,31 @@ const HomePage = () => {
                                             title={e.nomeEvento}
                                             description={e.descricao}
                                             eventDate={e.dataEvento}
-                                            
+                                            linkText={"Conectar"} 
+                                        />
+                                    );
+                                })
+                            }
+                        </div>
+                    </Container>
+
+                    <Container>
+                        <Title titleText={"Eventos Passados"} />
+
+                        <div className="events-box">
+                            {/* dentro da div event blocks nós criamos
+                            um código de javascript usando as chaves */}
+                            {
+                                // Aqui chamamos a array criada e criamos um componente para cada item dela
+                                backEvents.map((e) => {
+                                    return (
+                                        <NextEvent
+                                            key={e.idEvento}
+                                            idEvent={e.idEvento}
+                                            title={e.nomeEvento}
+                                            description={e.descricao}
+                                            eventDate={e.dataEvento}
+                                            linkText={"Visualizar"}
                                         />
                                     );
                                 })

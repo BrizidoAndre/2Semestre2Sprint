@@ -12,6 +12,7 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import InstituicaoPage from "../Pages/InstituicaoPage/InstituicaoPage";
 import { PrivateRoute } from "./PrivateRoute";
 import EventoAlunoPage from "../Pages/EventoAlunoPage/EventoAlunoPage";
+import DetalhesEventoPage from "../Pages/DetalhesEventoPage/DetalhesEventoPage";
 
 
 // Sempre nessa ordem as rotas retornam um BrowserRouter > Routes > Route
@@ -62,6 +63,7 @@ const Rotas = () => {
                         }
                     />
 
+                    <Route element={<DetalhesEventoPage />} path="/detalheEvento"/>
                     <Route element={<LoginPage />} path="/loginPage" />
                 </Routes>
                 <Footer />

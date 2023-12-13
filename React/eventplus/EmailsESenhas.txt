@@ -1,0 +1,14 @@
+Administrador
+{
+  "nome": "André",
+  "email": "andre@bol.com",
+  "senha": "andrebol",
+
+}
+
+Aluno
+{
+  "nome": "ALunosalunados",
+  "email": "Alienados@gmail.com",
+  "senha": "AlienadosSenha"
+}

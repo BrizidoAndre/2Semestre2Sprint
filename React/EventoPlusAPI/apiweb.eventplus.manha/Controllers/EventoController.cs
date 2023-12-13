@@ -18,19 +18,6 @@ namespace apiweb.eventplus.manha.Controllers
             _eventoRepository = new EventoRepository();
         }
 
-        [HttpGet("ListarProximos")]
-        public IActionResult ListarProximos()
-        {
-            try
-            {
-                return Ok(_eventoRepository.ListarProximos());
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
@@ -44,6 +31,33 @@ namespace apiweb.eventplus.manha.Controllers
                 throw;
             }
         }
+
+        [HttpGet("ListarProximos")]
+        public IActionResult ListarProximos()
+        {
+            try
+            {
+                return Ok(_eventoRepository.ListarProximos());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarAnteriores")]
+        public IActionResult GetAnteriores()
+        {
+            try
+            {
+                return Ok(_eventoRepository.ListarAnteriores());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
         [HttpPost]
         public IActionResult Post(Evento evento)

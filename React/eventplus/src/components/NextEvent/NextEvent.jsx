@@ -3,7 +3,7 @@ import './NextEvent.css'
 import { dateFormatDbToView, dateFormatDbToViewEfetivo } from "../../Utils/stringFunctions"
 import { Tooltip } from 'react-tooltip';
 
-const NextEvent = ({ title, description, eventDate, idEvent }) => {
+const NextEvent = ({ title, description, eventDate, idEvent, linkText}) => {
     function conectar(idEvent) {
         // dá pra usar a prop idEvent? testar
         alert(`Chamar o recurso para conectar: ${idEvent}`)
@@ -25,7 +25,7 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
 
             <p className='event-card__description'>{dateFormatDbToViewEfetivo(eventDate)}</p>
 
-            <a onClick={() => { conectar(idEvent) }} className="event-card__connect-link" href=''>Conectar</a>
+            <a onClick={() => { conectar(idEvent) }} className="event-card__connect-link" href=''>{linkText}</a>
         </article>
     );
 };

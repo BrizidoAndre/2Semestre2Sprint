@@ -171,6 +171,9 @@ const EventoAlunoPage = () => {
 
     const showHideModal = (idEvento) => {
 
+        setNovoComentario("");
+        setComentario("Não informado.")
+
         setShowModal(showModal ? false : true);
 
         if (showModal) { //Um if para quando fecharmos o modal não fazer a requisição novamente
@@ -184,32 +187,44 @@ const EventoAlunoPage = () => {
         setIdEvento(idEvento)
 
         loadMyCommentary(idEvento);
+
+        
     };
 
     // ler um comentário
     async function loadMyCommentary(id) {
 
+
         const request = await api.get(`${commentEventResource}/BuscarPorIdUsuario?idAluno=${userData.UserId}&idEvento=${id}`)
 
-        setComentario(request.data.descricao)
-        setIdComentario(request.data.idComentarioEvento)
+        if(request.status === 200)
+        {
+            setComentario(request.data.descricao)
+            setIdComentario(request.data.idComentarioEvento)
+        }
     }
 
     // Cadastra um comentário
     async function postMyCommentary() {
 
-        const request = api.post(commentEventResource, {
-            descricao: novoComentario,
-            exibe: true,
-            idUsuario: userData.UserId,
-            idEvento: idEvento
-        });
+        if (comentario === "Não informado." || comentario === "Comentário Deletado!") {
+            const request = await api.post(commentEventResource, {
+                descricao: novoComentario,
+                exibe: true,
+                idUsuario: userData.UserId,
+                idEvento: idEvento
+            });
 
-        const chamado = await api.get(`${commentEventResource}/BuscarPorIdUsuario?idAluno=${userData.UserId}&idEvento=${idEvento}`)
 
-        setComentario(novoComentario);
-        setNovoComentario("");
-        Aviso(3);
+            setComentario(novoComentario);
+            setNovoComentario("");
+            Aviso(3);
+        }
+
+        else{
+            Aviso("Só é possivel fazer um comentário por evento")
+        }
+
     }
 
     // remove o comentário
