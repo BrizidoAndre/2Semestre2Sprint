@@ -24,6 +24,7 @@ const DetalhesEventoPage = () => {
 
     // IdDoEvento Usado como parâmetro para buscar evento específico
     const { idEvento } = useParams();
+    // UseContext para buscar
 
 
 
