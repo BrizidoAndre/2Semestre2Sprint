@@ -58,12 +58,13 @@
   
   .tbal-data__head-title:first-of-type,
   .tbal-data__data:first-of-type {
-    text-align: left;
+    text-align: center;
   }
   
   .tbal-data__data {
     display: flex;
     align-items: baseline;
+    justify-content: center;
     /* margin-bottom: 15px; */
   }
   

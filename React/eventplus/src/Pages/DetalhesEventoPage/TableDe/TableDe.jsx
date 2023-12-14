@@ -1,12 +1,16 @@
 import React from "react";
-import visualizeIcon from "../../../assets/images/icons8-visível-30.png"
+import "./TableDe.css";
+
+// Importando functions
 import { dateFormatDbToViewEfetivo } from "../../../Utils/stringFunctions";
-import ToggleSwitch from "../../../components/Toggle/Toggle";
+
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
 
-// import trashDelete from "../../../assets/images/trash-delete.svg";
-import "./TableDe.css";
+// Importando imagens
+import openEye from "../../../assets/images/icons8-visível-30.png"
+import closedEye from "../../../assets/images/icons8-olho-fechado-50.png"
+
 
 const Table = ({ event, comments, fnShowModal = null }) => {
   return (
@@ -43,16 +47,26 @@ const Table = ({ event, comments, fnShowModal = null }) => {
                 {e.descricao}
               </td>
 
+
               <td className="tbal-data__data tbal-data__data--big">
                 {e.usuario.nome}
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
-                <img
-                  className="tbal-data__icon"
-                  src={visualizeIcon}
-                  alt="Ícone de visualização se o comentário tá exibindo"
-                />
+
+                {e.exibe ? <>
+                  <img
+                    className="tbal-data__icon"
+                    src={openEye}
+                    alt="Ícone de visualização se o comentário tá exibindo"
+                  />
+                </> : <>
+                  <img
+                    className="tbal-data__icon"
+                    src={closedEye}
+                    alt="Ícone de visualização se o comentário tá exibindo"
+                  />
+                </>}
 
               </td>
             </tr>

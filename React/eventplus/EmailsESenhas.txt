@@ -12,3 +12,12 @@ Aluno
   "email": "Alienados@gmail.com",
   "senha": "AlienadosSenha"
 }
+
+Outro Aluno
+
+{
+  "nome": "OutroAluno",
+  "email": "outro@gmail.com",
+  "senha": "outraSenha",
+  "idTipoUsuario": "8761abe4-91f4-4844-879b-7507f528d553"
+}
