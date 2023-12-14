@@ -46,7 +46,6 @@ const DetalhesEventoPage = () => {
     async function loadComments() {
         try {
             const request = await api.get(`${commentEventResource}/BuscarPorEvento/${idEvento}`)
-
             setComments(request.data);
 
         } catch (error) {
