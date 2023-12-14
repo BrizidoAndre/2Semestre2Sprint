@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom" //Rota V6 já atualizada é preciso chamar essas três propriedades para criar um programa
 
 // Importando as páginas
@@ -58,12 +58,14 @@ const Rotas = () => {
                         path="/eventos-aluno"
                         element={
                             <PrivateRoute redirectTo="/">
-                                <EventoAlunoPage/>
+                                <EventoAlunoPage />
                             </PrivateRoute>
                         }
                     />
 
-                    <Route element={<DetalhesEventoPage />} path="/detalheEvento"/>
+                    {/* //*Para usar o useParams a variável fica depois de dois pontos */}
+                    <Route element={<DetalhesEventoPage />} path={`/detalheEvento/:idEvento`} />
+
                     <Route element={<LoginPage />} path="/loginPage" />
                 </Routes>
                 <Footer />

@@ -14,6 +14,8 @@ const Nav = ({ exibeNavbar, setExibeNavbar }) => {
 
     const { userData, setUseData } = useContext(UserContext)
 
+    const idEvento  = Math.random();
+
 
     return (
         <nav className={`navbar ${exibeNavbar ? "exibeNavbar" : ""}`}>
@@ -46,11 +48,6 @@ const Nav = ({ exibeNavbar, setExibeNavbar }) => {
                     className='navbar__item'
                     to={"/"}
                 >Home</Link>
-                <Link
-                    onClick={() => { setExibeNavbar(false) }}
-                    className='navbar__item'
-                    to={"/detalheEvento"} 
-                >Detalhe Evento</Link>
                 {userData.name && userData.role === "Administrador" ? (
                     <>
                         <Link

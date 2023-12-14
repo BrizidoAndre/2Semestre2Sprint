@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 
@@ -8,11 +9,18 @@ const TestePage = () => {
     const [n2, setN2] = useState(0);
     const [total, setTotal] = useState(0);
 
+    // Usando UseParams
+    const {idEvento} = useParams();
+
     // Função para calcular as variáveis do componente
     function handleCalcular(e) {
         e.preventDefault();
         setTotal(parseFloat(n1) + parseFloat(n2));
     };
+    
+    useEffect(() => {
+        alert(`id do Evento ${idEvento} recuperado`)
+    },[])
 
     return (
         <div>

@@ -32,7 +32,24 @@ namespace apiweb.eventplus.manha.Repositories
 
         public Evento BuscarPorId(Guid id)
         {
-            Evento eventoBuscado = _eventContext.Evento.FirstOrDefault(z => z.IdEvento == id)!;
+            Evento eventoBuscado = _eventContext.Evento.Select(z => new Evento
+            {
+                IdEvento = z.IdEvento,
+                DataEvento = z.DataEvento,
+                NomeEvento = z.NomeEvento,
+                Descricao = z.Descricao,
+                IdInstituicao = z.IdInstituicao,
+                IdTipoEvento = z.IdTipoEvento,
+                TipoEvento = new TipoEvento
+                {
+                    Titulo = z.TipoEvento.Titulo,
+                    IdTipoEvento = z.TipoEvento.IdTipoEvento
+                },
+                Instituicao = new Instituicao
+                {
+                    NomeFantasia = z.Instituicao.NomeFantasia
+                }
+            }).FirstOrDefault(z => z.IdEvento == id)!;
 
             if (eventoBuscado != null)
             {

@@ -57,6 +57,28 @@ namespace apiweb.eventplus.manha.Repositories
             }).FirstOrDefault(z => z.IdUsuario == id && z.IdEvento == idEvento)!;
         }
 
+        public List<ComentarioEvento> BuscarPorEvento(Guid id)
+        {
+            return _eventContext.ComentarioEvento.Select(z => new ComentarioEvento
+            {
+                IdComentarioEvento = z.IdComentarioEvento,
+                Descricao = z.Descricao,
+                Exibe = z.Exibe,
+                IdUsuario = z.IdUsuario,
+                IdEvento = z.IdEvento,
+
+                Usuario = new Usuario
+                {
+                    Nome = z.Usuario.Nome
+                },
+
+                Evento = new Evento
+                {
+                    NomeEvento = z.Evento.NomeEvento
+                }
+            }).Where(z => z.IdEvento == id).ToList();
+        }
+
         public void Cadastrar(ComentarioEvento novoComentario)
         {
             if (novoComentario != null)

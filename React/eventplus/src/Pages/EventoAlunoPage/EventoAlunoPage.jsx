@@ -286,7 +286,7 @@ const EventoAlunoPage = () => {
 
             <MainContent>
                 <Container>
-                    <Title titleText={"Eventos"} className="custom-title" />
+                    <Title titleText={"Eventos"} nomeClass="custom-title" />
 
                     <SelectMyEvents
                         id="id-tipo-evento"

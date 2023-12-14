@@ -49,6 +49,19 @@ namespace apiweb.eventplus.manha.Controllers
             }
         }
 
+        [HttpGet("BuscarPorEvento/{id}")]
+        public IActionResult GetByEvent(Guid id)
+        {
+            try
+            {
+                return Ok(comentario.BuscarPorEvento(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Post(ComentarioEvento novoComentario)
         {
