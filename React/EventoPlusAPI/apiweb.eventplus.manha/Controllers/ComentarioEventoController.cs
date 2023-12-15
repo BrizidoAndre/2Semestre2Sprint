@@ -91,12 +91,12 @@ namespace apiweb.eventplus.manha.Controllers
             }
         }
 
-        [HttpGet("ListarSomenteExibe")]
-        public IActionResult GetExibe()
+        [HttpGet("ListarSomenteExibe/{id}")]
+        public IActionResult GetExibe(Guid id)
         {
             try
             {
-                return Ok(comentario.ListarSomenteExibe());
+                return Ok(comentario.ListarSomenteExibe(id));
             }
             catch (Exception e)
             {
@@ -114,7 +114,7 @@ namespace apiweb.eventplus.manha.Controllers
                     return BadRequest("O comentário está vazio");
                 }
 
-                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(_comentarioEvento.Descricao));
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(_comentarioEvento.Descricao!));
 
                 var moderationResult = await _contentModeratorClient.TextModeration.ScreenTextAsync("text/plain", stream, "por", false, false, null, true);
 
@@ -126,7 +126,7 @@ namespace apiweb.eventplus.manha.Controllers
                 }
                 else
                 {
-                    _comentarioEvento.Exibe = false;
+                    _comentarioEvento.Exibe = true;
 
                     comentario.Cadastrar(_comentarioEvento);
                 }

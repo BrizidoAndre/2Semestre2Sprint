@@ -658,3 +658,6 @@ C:\Users\abriz\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.man
 C:\Users\51910007811\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.manha\bin\Debug\net7.0\Microsoft.Azure.CognitiveServices.ContentModerator.dll
 C:\Users\51910007811\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.manha\bin\Debug\net7.0\Microsoft.Rest.ClientRuntime.dll
 C:\Users\51910007811\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.manha\bin\Debug\net7.0\Microsoft.Rest.ClientRuntime.Azure.dll
+C:\Users\abriz\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.manha\bin\Debug\net7.0\Microsoft.Azure.CognitiveServices.ContentModerator.dll
+C:\Users\abriz\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.manha\bin\Debug\net7.0\Microsoft.Rest.ClientRuntime.dll
+C:\Users\abriz\Desktop\2Semestre2Sprint\React\EventoPlusAPI\apiweb.eventplus.manha\bin\Debug\net7.0\Microsoft.Rest.ClientRuntime.Azure.dll

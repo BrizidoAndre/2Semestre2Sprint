@@ -12,7 +12,7 @@ namespace apiweb.eventplus.manha.Repositories
             return _eventContext.ComentarioEvento.ToList();
         }
 
-        public List<ComentarioEvento> ListarSomenteExibe()
+        public List<ComentarioEvento> ListarSomenteExibe(Guid id)
         {
             return (_eventContext.ComentarioEvento.Select(z => new ComentarioEvento
             {
@@ -31,7 +31,7 @@ namespace apiweb.eventplus.manha.Repositories
                 {
                     NomeEvento = z.Evento.NomeEvento
                 }
-            }).Where(z => z.Exibe == true).ToList());
+            }).Where(z => z.Exibe == true && z.IdEvento == id).ToList());
         }
 
         
