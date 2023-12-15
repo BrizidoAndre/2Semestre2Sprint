@@ -208,7 +208,7 @@ const EventoAlunoPage = () => {
     async function postMyCommentary() {
 
         if (comentario === "Não informado." || comentario === "Comentário Deletado!") {
-            const request = await api.post(commentEventResource, {
+            const request = await api.post(`${commentEventResource}/ComentarioIA`, {
                 descricao: novoComentario,
                 exibe: true,
                 idUsuario: userData.UserId,

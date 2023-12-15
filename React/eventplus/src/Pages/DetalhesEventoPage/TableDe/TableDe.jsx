@@ -12,7 +12,7 @@ import openEye from "../../../assets/images/icons8-visível-30.png"
 import closedEye from "../../../assets/images/icons8-olho-fechado-50.png"
 
 
-const Table = ({ event, comments, fnShowModal = null }) => {
+const Table = ({ event, comments, isAdmin = false }) => {
   return (
     <table className="tbal-data">
       <thead className="tbal-data__head">
@@ -34,9 +34,14 @@ const Table = ({ event, comments, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Usuario
           </th>
-          <th className="tbal-data__head-title tbal-data__head-title--big">
-            Visualizar
-          </th>
+          {isAdmin === true ?
+            <>
+              <th className="tbal-data__head-title tbal-data__head-title--big">
+                Exibe
+              </th>
+            </> : <>
+
+            </>}
         </tr>
       </thead>
       <tbody>
@@ -52,23 +57,30 @@ const Table = ({ event, comments, fnShowModal = null }) => {
                 {e.usuario.nome}
               </td>
 
-              <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
+              {isAdmin === true ?
+                <>
+                  <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
 
-                {e.exibe ? <>
-                  <img
-                    className="tbal-data__icon"
-                    src={openEye}
-                    alt="Ícone de visualização se o comentário tá exibindo"
-                  />
+                    {e.exibe ? <>
+                      <img
+                        className="tbal-data__icon"
+                        src={openEye}
+                        alt="Ícone de visualização se o comentário tá exibindo"
+                      />
+                    </> : <>
+                      <img
+                        className="tbal-data__icon"
+                        src={closedEye}
+                        alt="Ícone de visualização se o comentário tá exibindo"
+                      />
+                    </>}
+
+                  </td>
                 </> : <>
-                  <img
-                    className="tbal-data__icon"
-                    src={closedEye}
-                    alt="Ícone de visualização se o comentário tá exibindo"
-                  />
+
                 </>}
 
-              </td>
+
             </tr>
           );
         })}

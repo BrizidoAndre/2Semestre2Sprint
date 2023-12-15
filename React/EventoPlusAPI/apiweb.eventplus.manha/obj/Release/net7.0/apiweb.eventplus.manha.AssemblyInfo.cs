@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("apiweb.eventplus.manha")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eeceb794dcb7c4abd02d8617a83962c05783aaf9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bde294d256fbb450cf6398ac534cc84bb0771fc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("apiweb.eventplus.manha")]
 [assembly: System.Reflection.AssemblyTitleAttribute("apiweb.eventplus.manha")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

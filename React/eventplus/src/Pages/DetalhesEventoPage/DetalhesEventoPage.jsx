@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '../../components/Container/Container';
 import MainContent from '../../components/MainContent/MainContent';
 import Title from '../../components/Title/Title';
 import api, { commentEventResource, eventsResource } from '../../Services/Service';
 import Table from './TableDe/TableDe';
+import { UserContext } from '../../context/AuthContext';
 
 const DetalhesEventoPage = () => {
 
@@ -24,7 +25,8 @@ const DetalhesEventoPage = () => {
 
     // IdDoEvento Usado como parâmetro para buscar evento específico
     const { idEvento } = useParams();
-    // UseContext para buscar
+    // UseContext para buscar informações do perfil
+    const { userData, setUserData } = useContext(UserContext)
 
 
 
@@ -46,8 +48,16 @@ const DetalhesEventoPage = () => {
 
     async function loadComments() {
         try {
-            const request = await api.get(`${commentEventResource}/BuscarPorEvento/${idEvento}`)
-            setComments(request.data);
+
+            if (userData.role === "Administrador") {
+                const request = await api.get(`${commentEventResource}/BuscarPorEvento/${idEvento}`)
+                setComments(request.data);
+            }
+
+            else{
+                const request = await api.get(`${commentEventResource}/ListarSomenteExibe/${idEvento}`)
+                setComments(request.data);
+            }
 
         } catch (error) {
             console.log(error);
@@ -60,8 +70,13 @@ const DetalhesEventoPage = () => {
                 <Container>
                     <Title nomeClass='custom-title' titleText={evento.nomeEvento} />
 
+                    {userData.role === "Administrador" ?
+                        <>
+                            <Table event={evento} comments={comments} isAdmin={true} />
+                        </> : <>
 
-                    <Table event={evento} comments={comments} />
+                            <Table event={evento} comments={comments} />
+                        </>}
                 </Container>
             </MainContent>
         </>
